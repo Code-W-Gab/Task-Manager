@@ -1,14 +1,17 @@
 import { Plus, LayoutDashboard, List } from "lucide-react"
 
-export default function AdminTask() {
+export default function AdminTask({ onCreateTask }) {
   return(
     <div className="bg-gray-200 h-full rounded-sm p-5">
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-xl font-bold">Tasks</h1>
-        <div className="flex items-center gap-1 bg-green-400 px-2 py-1.5 rounded-md">
+        <button 
+          onClick={onCreateTask}
+          className="flex items-center gap-1 bg-green-400 px-2 py-1.5 rounded-md hover:bg-green-500 transition-colors"
+        >
           <Plus size={20}/>
           <span>Create Task</span>
-        </div>
+        </button>
       </div>
       <div className="flex gap-4 items-center">
         {/* Board view */}
