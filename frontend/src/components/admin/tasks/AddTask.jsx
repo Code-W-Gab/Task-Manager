@@ -2,7 +2,7 @@ import { useState } from "react"
 import { createTask } from "../../../services/taskService"
 import toast from "react-hot-toast"
 
-export default function AddTask({ onClose }) {
+export default function AddTask({ onClose, fetchTasks }) {
   const [title, setTitle] = useState("")
   const [users, setUsers] = useState([])
   const [stage, setStage] = useState("ToDo")
@@ -23,6 +23,7 @@ export default function AddTask({ onClose }) {
         toast.success("Task created successfully!")
         setTitle("")
         setDate("")
+        fetchTasks()
         onClose() // Close modal on success
         console.log(res)
       })
@@ -77,7 +78,7 @@ export default function AddTask({ onClose }) {
             </select>
           </div>
           <div className="flex flex-col">
-            <label>Task Date</label>
+            <label>Task Due Date</label>
             <input 
             type="date"
             value={date}

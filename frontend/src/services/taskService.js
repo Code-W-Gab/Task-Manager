@@ -6,3 +6,5 @@ export const createTask = (title, stage, date, priorityLevel) => api.post('/task
   Date: date, 
   PriorityLevel: priorityLevel 
 })
+// Get All Tasks
+export const getAllTask = () => api.get('/task/all')
