@@ -1,7 +1,7 @@
 import { useState } from "react"
-import AdminTask from "../components/admin/AdminTask"
+import AdminTask from "../components/admin/tasks/AdminTask"
 import Navigation from "../components/common/Navigation"
-import AddTask from "../components/admin/AddTask"
+import AddTask from "../components/admin/tasks/AddTask"
 
 export default function Tasks() {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -12,8 +12,8 @@ export default function Tasks() {
       
       {/* Modal Overlay */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
-          <div onClick={(e) => e.stopPropagation()}>
+        <div className="fixed inset-0 flex bg-gray-800/50 items-center justify-center ">
+          <div className="bg-opacity-25">
             <AddTask onClose={() => setIsModalOpen(false)} />
           </div>
         </div>
