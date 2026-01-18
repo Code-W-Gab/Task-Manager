@@ -4,9 +4,10 @@ import { formatDate } from "../../../utils/Date"
 
 export default function BoardView({tasks}) {
   const [subTask, setSubTask] = useState("No Sub-Task")
+  const truncate = (text, max) => text && text.length > max ? `${text.slice(0, max)}...` : text
 
   return(
-    <div className="grid grid-cols-3 gap-4">
+    <div className="grid grid-cols-3 gap-4 bg-gray-200">
       {
         tasks.length === 0 
         ? <div>NO TASK ADDED</div>
@@ -21,7 +22,7 @@ export default function BoardView({tasks}) {
             </div>
             <div className="flex items-center gap-1 mb-0.5">
               <Circle size={15} className={`rounded-full ${task.Stage === "ToDo" ? "bg-blue-500 text-blue-500" : task.Stage === "In-Progress" ? "bg-orange-500 text-orange-500" : "bg-green-500 text-green-500 "}`}/>
-              <span>{task.Title}</span>
+              <span>{truncate(task.Title, 25)}</span>
             </div>
             <p className="text-sm text-gray-400">{formatDate(task.Date)}</p>
             <hr className="my-2 text-gray-400"/>

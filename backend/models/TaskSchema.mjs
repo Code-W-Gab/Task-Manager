@@ -6,12 +6,10 @@ const TaskSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
-  // Change this later
-  AssignedTo: {
+  AssignedTo: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: false
-  },
+    ref: "Teams"
+  }],
   Stage: {
     type: String,
     required: true,

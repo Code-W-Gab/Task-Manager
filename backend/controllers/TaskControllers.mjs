@@ -23,7 +23,7 @@ export const createTask = async (req, res, next) => {
 // Get all tasks
 export const getAllTasks = async (req, res, next) => {
   try {
-    const tasks = await Task.find().populate('AssignedTo', 'name email')
+    const tasks = await Task.find().populate('AssignedTo', 'FullName Email')
     res.status(200).json(tasks)
   } catch (error) {
     next(error)

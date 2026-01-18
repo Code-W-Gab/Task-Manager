@@ -7,15 +7,15 @@ export default function SideBar() {
   const navItems = [
     { to: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
     { to: "/tasks", icon: ClipboardCheck, label: "Tasks" },
-    { to: "/completed", icon: CircleCheck, label: "Completed" },
-    { to: "/in-progress", icon: CalendarCheck2, label: "In-Progress" },
+    { to: "/completed/status", icon: CircleCheck, label: "Completed" },
+    { to: "/in-progress/status", icon: CalendarCheck2, label: "In-Progress" },
     { to: "/todo", icon: ListChecks, label: "To-Do" },
     { to: "/team", icon: Users, label: "Team" },
     { to: "/trash", icon: Trash2, label: "Trash" },
   ];
 
   return (
-    <div className="p-3 w-70 h-full min-h-screen">
+    <div className="p-3 w-70 h-full">
       {/* Title */}
       <div className="flex items-center gap-2 ">
         <span className="bg-green-500 p-2 rounded-full">
