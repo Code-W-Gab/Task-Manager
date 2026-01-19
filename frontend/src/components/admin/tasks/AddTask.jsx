@@ -3,7 +3,7 @@ import { createTask } from "../../../services/taskService"
 import { getAllUser } from "../../../services/teamService"
 import toast from "react-hot-toast"
 
-export default function AddTask({ onClose, fetchTasks }) {
+export default function AddTask({ onClose, fetchTasks, tasks }) {
   const [title, setTitle] = useState("")
   const [stage, setStage] = useState("")
   const [date, setDate] = useState("")
@@ -18,6 +18,7 @@ export default function AddTask({ onClose, fetchTasks }) {
       .catch(err => console.error(err))
   }, [])
 
+  
   const toggleAssignedUser = (userId) => {
     setAssignedTo((prev) =>
       prev.includes(userId)

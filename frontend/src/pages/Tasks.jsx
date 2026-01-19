@@ -17,6 +17,7 @@ export default function Tasks() {
   useEffect(() => {
     fetchTasks()
   }, [])
+  
 
   return (
     <Navigation>
@@ -26,7 +27,7 @@ export default function Tasks() {
       {isModalOpen && (
         <div className="fixed inset-0 flex bg-gray-800/50 items-center justify-center ">
           <div className="bg-opacity-25">
-            <AddTask onClose={() => setIsModalOpen(false)} fetchTasks={fetchTasks}/>
+            <AddTask onClose={() => setIsModalOpen(false)} fetchTasks={fetchTasks} />
           </div>
         </div>
       )}

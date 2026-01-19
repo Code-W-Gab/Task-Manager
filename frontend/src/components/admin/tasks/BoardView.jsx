@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { ChevronUp, ChevronsUp, ArrowUpWideNarrow, Circle, Ellipsis, Plus } from "lucide-react"
 import { formatDate } from "../../../utils/Date"
+import { getInitials } from "../../../utils/userLogo"
 
 export default function BoardView({tasks}) {
   const [subTask, setSubTask] = useState("No Sub-Task")
@@ -25,6 +26,32 @@ export default function BoardView({tasks}) {
               <span>{truncate(task.Title, 25)}</span>
             </div>
             <p className="text-sm text-gray-400">{formatDate(task.Date)}</p>
+            <hr className="my-2 text-gray-400"/>
+            
+            {/* Display Assigned Users */}
+            <div className="flex items-center justify-end gap-1">
+              {task.AssignedTo && task.AssignedTo.length > 0 ? (
+                <>
+                  {task.AssignedTo.slice(0, 3).map((user, index) => (
+                    <div 
+                      key={user._id || index}
+                      className="size-7 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-semibold"
+                      title={user.FullName}
+                    >
+                      {getInitials(user.FullName)}
+                    </div>
+                  ))}
+                  {task.AssignedTo.length > 3 && (
+                    <span className="text-xs text-gray-500">
+                      +{task.AssignedTo.length - 3}
+                    </span>
+                  )}
+                </>
+              ) : (
+                <span className="text-xs text-gray-400">Unassigned</span>
+              )}
+            </div>
+            
             <hr className="my-2 text-gray-400"/>
             <span className="text-gray-400">{subTask}</span>
             <button className="flex items-center text-gray-400 gap-2 mt-2">
