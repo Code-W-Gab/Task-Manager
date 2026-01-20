@@ -3,7 +3,7 @@ import { createTask } from "../../../services/taskService"
 import { getAllUser } from "../../../services/teamService"
 import toast from "react-hot-toast"
 
-export default function AddTask({ onClose, fetchTasks, tasks }) {
+export default function AddTask({ onClose, fetchTasks }) {
   const [title, setTitle] = useState("")
   const [stage, setStage] = useState("")
   const [date, setDate] = useState("")
