@@ -1,13 +1,13 @@
 import { Plus, LayoutDashboard, List } from "lucide-react"
 import { useState } from "react"
-import BoardView from "./BoardView"
-import ListView from "./ListView"
+import TasksBoardView from "./TasksBoardView"
+import TasksListView from "./TasksListView"
 
 export default function AdminTask({ onCreateTask, tasks }) {
   const [activeView, setActiveView] = useState("board") // Default
 
   return(
-    <div className="bg-gray-200 h-full rounded-sm p-5">
+    <div className="bg-gray-200 min-h-screen rounded-sm p-5">
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-xl font-bold">Tasks</h1>
         <button 
@@ -37,8 +37,8 @@ export default function AdminTask({ onCreateTask, tasks }) {
       
       {/* Conditional Rendering */}
       {activeView === "board" 
-      ? <BoardView tasks={tasks}/> 
-      : <ListView tasks={tasks}/>}
+      ? <TasksBoardView tasks={tasks}/> 
+      : <TasksListView tasks={tasks}/>}
     </div>
   )
 }

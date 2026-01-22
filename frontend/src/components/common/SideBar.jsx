@@ -9,7 +9,7 @@ export default function SideBar() {
     { to: "/tasks", icon: ClipboardCheck, label: "Tasks" },
     { to: "/completed/status", icon: CircleCheck, label: "Completed" },
     { to: "/in-progress/status", icon: CalendarCheck2, label: "In-Progress" },
-    { to: "/todo", icon: ListChecks, label: "To-Do" },
+    { to: "/todo/status", icon: ListChecks, label: "To-Do" },
     { to: "/team", icon: Users, label: "Team" },
     { to: "/trash", icon: Trash2, label: "Trash" },
   ];
