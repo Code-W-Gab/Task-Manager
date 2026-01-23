@@ -22,7 +22,7 @@ function App() {
           <Route path="/todo/status" element={<ToDo/>}/>
           <Route path="/tasks" element={<Tasks/>}/>
           <Route path="/team" element={<Team/>}/>
-          <Route path="/trashed" element={<Trash/>}/>
+          <Route path="/trash" element={<Trash/>}/>
         </Route>
         
         <Route path="/login" element={<Login/>}/>
