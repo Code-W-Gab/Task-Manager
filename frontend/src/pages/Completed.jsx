@@ -23,7 +23,7 @@ export default function Completed() {
 
   return (
     <Navigation>
-      <AdminCompleted completedTasks={completedTasks}/>
+      <AdminCompleted completedTasks={completedTasks} fetchCompletedTasks={fetchCompletedTasks}/>
     </Navigation>
   )
 }

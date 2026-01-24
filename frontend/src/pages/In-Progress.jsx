@@ -21,7 +21,7 @@ export default function InProgress() {
 
   return (
     <Navigation>
-      <AdminInProgress inProgressTasks={inProgressTasks}/>
+      <AdminInProgress inProgressTasks={inProgressTasks} fetchInProgressTask={fetchInProgressTask}/>
     </Navigation>
   )
 }

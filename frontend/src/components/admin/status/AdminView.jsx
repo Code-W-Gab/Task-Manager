@@ -3,7 +3,7 @@ import { LayoutDashboard, List } from "lucide-react"
 import BoardView from "./BoardView"
 import ListView from "./ListView"
 
-export default function AdminView({ Title, tasks }) {
+export default function AdminView({ Title, tasks, fetchCompletedTasks, fetchInProgressTask, fetchTodoTask }) {
   const [activeView, setActiveView] = useState("board")
 
   return (
@@ -26,7 +26,21 @@ export default function AdminView({ Title, tasks }) {
         </button>
       </div>
       
-      {activeView === "board" ? <BoardView tasks={tasks} /> : <ListView tasks={tasks}/>}
+      {
+        activeView === "board" 
+        ? <BoardView 
+          tasks={tasks} 
+          fetchCompletedTasks={fetchCompletedTasks}
+          fetchInProgressTask={fetchInProgressTask}
+          fetchTodoTask={fetchTodoTask}
+        /> 
+        : <ListView 
+          tasks={tasks} 
+          fetchCompletedTasks={fetchCompletedTasks}
+          fetchInProgressTask={fetchInProgressTask}
+          fetchTodoTask={fetchTodoTask}
+        />
+      }
     </div>
   )
 }

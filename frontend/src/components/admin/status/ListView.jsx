@@ -6,7 +6,7 @@ import DeletePopUp from "../../common/DeletePopUp"
 import { deleteTask } from "../../../services/taskService"
 import toast from "react-hot-toast"
 
-export default function ListView({ tasks, fetchTasks }) {
+export default function ListView({ tasks, fetchTasks, fetchCompletedTasks, fetchInProgressTask, fetchTodoTask }) {
   const truncate = (text, max = 40) => text && text.length > max ? `${text.slice(0, max)}...` : text
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedTaskId, setSelectedTaskId] = useState(null)
@@ -17,7 +17,10 @@ export default function ListView({ tasks, fetchTasks }) {
         toast.success("Task Successfully Deleted!")
         console.log(res)
         setIsModalOpen(false)
-        fetchTasks()
+        if (fetchTasks) fetchTasks()
+        if (fetchCompletedTasks) fetchCompletedTasks()
+        if (fetchInProgressTask) fetchInProgressTask()
+        if (fetchTodoTask) fetchTodoTask()
       })
       .catch(err => {
         toast.error("Failed to delete task")
@@ -93,7 +96,8 @@ export default function ListView({ tasks, fetchTasks }) {
           <div className="bg-opacity-25">
             <DeletePopUp 
               setIsModalOpen={setIsModalOpen} 
-              onDelete={() => handleDeleteTask(selectedTaskId)}/>
+              onDelete={() => handleDeleteTask(selectedTaskId)}
+            />
           </div>
         </div>
       )}

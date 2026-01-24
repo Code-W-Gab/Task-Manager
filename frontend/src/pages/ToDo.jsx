@@ -21,7 +21,7 @@ export default function ToDo() {
 
   return (
     <Navigation>
-      <AdminTodo todoTasks={todoTasks}/>
+      <AdminTodo todoTasks={todoTasks} fetchTodoTask={fetchTodoTask}/>
     </Navigation>
   )
 }

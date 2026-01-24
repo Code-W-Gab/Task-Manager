@@ -37,7 +37,7 @@ export default function AdminTask({ onCreateTask, tasks, fetchTasks }) {
       
       {/* Conditional Rendering */}
       {activeView === "board" 
-      ? <TasksBoardView tasks={tasks}/> 
+      ? <TasksBoardView tasks={tasks} fetchTasks={fetchTasks}/> 
       : <TasksListView tasks={tasks} fetchTasks={fetchTasks}/>}
     </div>
   )
