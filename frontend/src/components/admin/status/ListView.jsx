@@ -1,9 +1,29 @@
 import { ChevronUp, ChevronsUp, ArrowUpWideNarrow, Circle, Ellipsis, Plus } from "lucide-react"
 import { formatDate } from "../../../utils/Date"
 import { getInitials } from "../../../utils/userLogo"
+import { useState } from "react"
+import DeletePopUp from "../../common/DeletePopUp"
+import { deleteTask } from "../../../services/taskService"
+import toast from "react-hot-toast"
 
-export default function ListView({ tasks }) {
+export default function ListView({ tasks, fetchTasks }) {
   const truncate = (text, max = 40) => text && text.length > max ? `${text.slice(0, max)}...` : text
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedTaskId, setSelectedTaskId] = useState(null)
+
+  function handleDeleteTask(id) {
+    deleteTask(id)
+      .then(res => {
+        toast.success("Task Successfully Deleted!")
+        console.log(res)
+        setIsModalOpen(false)
+        fetchTasks()
+      })
+      .catch(err => {
+        toast.error("Failed to delete task")
+        console.log(err)
+      })
+  }
 
   return(
     <div className="min-h-screen">
@@ -58,12 +78,25 @@ export default function ListView({ tasks }) {
 
               <div className="flex gap-4">
                 <button className="text-green-500 text-sm">Edit</button>
-                <button className="text-red-500 text-sm">Delete</button>
+                <button className="text-red-500 text-sm" onClick={() => {
+                  setSelectedTaskId(task._id)
+                  setIsModalOpen(true)
+                }}>Delete</button>
               </div>
             </div>
           ))
         }
       </div>
+
+      {isModalOpen && (
+        <div className="fixed inset-0 flex bg-gray-800/50 items-center justify-center ">
+          <div className="bg-opacity-25">
+            <DeletePopUp 
+              setIsModalOpen={setIsModalOpen} 
+              onDelete={() => handleDeleteTask(selectedTaskId)}/>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

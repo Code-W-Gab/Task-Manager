@@ -3,7 +3,7 @@ import { useState } from "react"
 import TasksBoardView from "./TasksBoardView"
 import TasksListView from "./TasksListView"
 
-export default function AdminTask({ onCreateTask, tasks }) {
+export default function AdminTask({ onCreateTask, tasks, fetchTasks }) {
   const [activeView, setActiveView] = useState("board") // Default
 
   return(
@@ -38,7 +38,7 @@ export default function AdminTask({ onCreateTask, tasks }) {
       {/* Conditional Rendering */}
       {activeView === "board" 
       ? <TasksBoardView tasks={tasks}/> 
-      : <TasksListView tasks={tasks}/>}
+      : <TasksListView tasks={tasks} fetchTasks={fetchTasks}/>}
     </div>
   )
 }

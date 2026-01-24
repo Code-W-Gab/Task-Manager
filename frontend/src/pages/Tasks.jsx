@@ -21,7 +21,7 @@ export default function Tasks() {
 
   return (
     <Navigation>
-      <AdminTask onCreateTask={() => setIsModalOpen(true)} tasks={tasks}/>
+      <AdminTask onCreateTask={() => setIsModalOpen(true)} tasks={tasks} fetchTasks={fetchTasks}/>
       
       {/* Modal Overlay */}
       {isModalOpen && (
