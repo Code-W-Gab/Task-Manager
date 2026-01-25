@@ -33,12 +33,38 @@ const TeamController = {
     }
   },
 
+  // Get User by Id
+  async getUserById (req, res, next){
+    try {
+      const user = await Team.findById(req.params.id)
+      if (!user) return res.status(400).json({ message: "User not found" })
+      res.status(200).json(user)
+    } catch (error) {
+      next(error)
+    }
+  },
+
   // Delete user
   async deleteUser (req, res, next){
     try {
       const user = await Team.findByIdAndDelete(req.params.id)
       if (!user) return res.status(400).json({ message: "User not found"})
       res.status(200).json({ message: 'User deleted successfully' })
+    } catch (error) {
+      next(error)
+    }
+  },
+
+  // Update user
+  async updateUser (req, res, next){
+    try {
+      const updatedUser = await Team.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        { new: true, runValidators: true }
+      )
+      if (!updatedUser) return res.status(400).json({ message: "User not found" })
+      res.status(200).json(updatedUser)
     } catch (error) {
       next(error)
     }

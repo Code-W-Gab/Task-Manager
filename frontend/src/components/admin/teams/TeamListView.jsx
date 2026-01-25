@@ -3,11 +3,12 @@ import { getInitials } from "../../../utils/userLogo"
 import DeletePopUp from "../../common/DeletePopUp"
 import { deleteUser } from "../../../services/teamService"
 import toast from "react-hot-toast"
+import EditUser from "./EditUser"
 
 export default function TeamListView({ users, FetchUser }) {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const [selectedUserId, setSelectedUserId] = useState(null)
-  console.log(selectedUserId)
 
   const handleDeleteUser = (id) => {
     deleteUser(id)
@@ -50,7 +51,15 @@ export default function TeamListView({ users, FetchUser }) {
           <p>{user.Role}</p>
           <p className={`${user.Active === "Active" ? "text-blue-600" : "text-orange-600" } font-bold`}>{user.Active}</p>
           <div className="flex gap-4">
-            <button className="text-green-500 text-sm">Edit</button>
+            <button 
+              className="text-green-500 text-sm"
+              onClick={() => {
+                setIsEditModalOpen(true)
+                setSelectedUserId(user._id)
+              }}
+            >
+              Edit
+            </button>
             <button 
               className="text-red-500 text-sm" 
               onClick={() => {
@@ -63,17 +72,33 @@ export default function TeamListView({ users, FetchUser }) {
         </div>
       ))
       }
-
+      
+      {/* Delete Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 flex bg-gray-800/50 items-center justify-center ">
           <div className="bg-opacity-25">
-            <DeletePopUp 
+            <DeletePopUp
+              title={"User"}
               setIsModalOpen={setIsModalOpen}
               onDelete={() => handleDeleteUser(selectedUserId)}
             />
           </div>
         </div>
       )}
+      
+      {/* Update Modal */}
+      {isEditModalOpen && (
+        <div className="fixed inset-0 flex bg-gray-800/50 items-center justify-center ">
+          <div className="bg-opacity-25">
+            <EditUser
+              FetchUser={FetchUser}
+              onClose={() => setIsEditModalOpen(false)}
+              id={selectedUserId}
+            />
+          </div>
+        </div>
+      )}
+
     </div>
   )
 }

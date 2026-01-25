@@ -95,6 +95,7 @@ export default function ListView({ tasks, fetchTasks, fetchCompletedTasks, fetch
         <div className="fixed inset-0 flex bg-gray-800/50 items-center justify-center ">
           <div className="bg-opacity-25">
             <DeletePopUp 
+              title={"Task"}
               setIsModalOpen={setIsModalOpen} 
               onDelete={() => handleDeleteTask(selectedTaskId)}
             />
