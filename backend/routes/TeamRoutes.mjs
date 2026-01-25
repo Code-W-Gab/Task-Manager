@@ -6,5 +6,7 @@ const router = express.Router()
 router.post('/create', TeamController.createUser)
 // Get All User
 router.get('/getAll', TeamController.getAllUser)
+// Delete User
+router.delete('/:id', TeamController.deleteUser)
 
 export default router

@@ -10,3 +10,6 @@ export const createUser = (fullName, title, email, role ) => api.post('/user/cre
 
 // Get All user
 export const getAllUser = () => api.get('/user/getAll')
+
+// Delete user
+export const deleteUser = (id) => api.delete(`/user/${id}`)

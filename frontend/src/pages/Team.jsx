@@ -20,7 +20,7 @@ export default function Team() {
 
   return (
     <Navigation>
-      <AdminTeams onAddNewUser={() => setIsModalOpen(true)} users={users}/>
+      <AdminTeams onAddNewUser={() => setIsModalOpen(true)} users={users} FetchUser={FetchUser}/>
 
       {isModalOpen && (
         <div className="fixed inset-0 flex bg-gray-800/50 items-center justify-center ">

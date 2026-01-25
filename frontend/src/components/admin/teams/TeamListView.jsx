@@ -1,5 +1,28 @@
+import { useState } from "react"
 import { getInitials } from "../../../utils/userLogo"
-export default function TeamListView({ users }) {
+import DeletePopUp from "../../common/DeletePopUp"
+import { deleteUser } from "../../../services/teamService"
+import toast from "react-hot-toast"
+
+export default function TeamListView({ users, FetchUser }) {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedUserId, setSelectedUserId] = useState(null)
+  console.log(selectedUserId)
+
+  const handleDeleteUser = (id) => {
+    deleteUser(id)
+      .then(res => {
+        console.log(res)
+        setIsModalOpen(false)
+        FetchUser()
+        toast.success("User Successfully Deleted!")
+      })
+      .catch(err => {
+        toast.error("Failed to delete task")
+        console.log(err)
+      })
+  }
+
   return(
     <div className="bg-white p-2 rounded-sm mt-5">
       <div className="grid grid-cols-[repeat(3,2fr)_repeat(3,1fr)] mb-2">
@@ -28,11 +51,29 @@ export default function TeamListView({ users }) {
           <p className={`${user.Active === "Active" ? "text-blue-600" : "text-orange-600" } font-bold`}>{user.Active}</p>
           <div className="flex gap-4">
             <button className="text-green-500 text-sm">Edit</button>
-            <button className="text-red-500 text-sm">Delete</button>
+            <button 
+              className="text-red-500 text-sm" 
+              onClick={() => {
+                setIsModalOpen(true)
+                setSelectedUserId(user._id)
+              }}>
+                Delete
+            </button>
           </div>
         </div>
       ))
       }
+
+      {isModalOpen && (
+        <div className="fixed inset-0 flex bg-gray-800/50 items-center justify-center ">
+          <div className="bg-opacity-25">
+            <DeletePopUp 
+              setIsModalOpen={setIsModalOpen}
+              onDelete={() => handleDeleteUser(selectedUserId)}
+            />
+          </div>
+        </div>
+      )}
     </div>
   )
 }

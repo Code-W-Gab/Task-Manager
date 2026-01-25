@@ -1,7 +1,7 @@
 import { Plus } from "lucide-react";
 import TeamListView from "./TeamListView";
 
-export default function AdminTeams({ onAddNewUser, users }) {
+export default function AdminTeams({ onAddNewUser, users, FetchUser }) {
   return(
     <div className="bg-gray-200 h-full rounded-sm p-5">
       <div className="flex items-center justify-between">
@@ -13,7 +13,7 @@ export default function AdminTeams({ onAddNewUser, users }) {
           <span>Add New User</span>
         </button>
       </div>
-      <TeamListView users={users}/>
+      <TeamListView users={users} FetchUser={FetchUser}/>
     </div>
   )
 }
