@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react"
-import { createTask } from "../../../services/taskService"
-import { getAllUser } from "../../../services/teamService"
+import { getTaskById, updateTask } from "../../../services/taskService"
 import toast from "react-hot-toast"
+import { getAllUser } from "../../../services/teamService"
 
-export default function AddTask({ onClose, fetchTasks }) {
+export default function EditTask({ fetchTasks, fetchCompletedTasks, fetchInProgressTask, fetchTodoTask, onClose, id }) {
   const [title, setTitle] = useState("")
   const [stage, setStage] = useState("")
   const [date, setDate] = useState("")
@@ -13,6 +13,37 @@ export default function AddTask({ onClose, fetchTasks }) {
   const [isAssignOpen, setIsAssignOpen] = useState(false)
 
   useEffect(() => {
+    getTaskById(id)
+      .then(res => {
+        console.log("Task data:", res.data) // Debug log
+        setTitle(res.data.Title)
+        setStage(res.data.Stage)
+        
+        // Format date to YYYY-MM-DD for input[type="date"]
+        if (res.data.Date) {
+          const dateObj = new Date(res.data.Date)
+          const formattedDate = dateObj.toISOString().split('T')[0]
+          setDate(formattedDate)
+        }
+        
+        setPriorityLevel(res.data.PriorityLevel)
+        
+        // Handle AssignedTo - could be array of IDs or array of objects
+        if (Array.isArray(res.data.AssignedTo)) {
+          const userIds = res.data.AssignedTo.map(user => 
+            typeof user === 'object' ? user._id : user
+          )
+          setAssignedTo(userIds)
+        }
+      })
+      .catch(err => {
+        console.log(err)
+        toast.error("Failed to fetch tasks")
+      })
+  }, [id])
+
+  useEffect(() => {
+    // Fetch all active users
     getAllUser()
       .then(res => {
         const activeUser = res.data.filter(user => user.Active == "Active")
@@ -20,7 +51,6 @@ export default function AddTask({ onClose, fetchTasks }) {
       })
       .catch(err => console.error(err))
   }, [])
-
   
   const toggleAssignedUser = (userId) => {
     setAssignedTo((prev) =>
@@ -30,36 +60,33 @@ export default function AddTask({ onClose, fetchTasks }) {
     )
   }
 
-  function HandleSubmit(e) { 
+  function handleUpdateTask(e) {
     e.preventDefault()
-    
-    if (!title.trim()) {
-      toast.error("Please enter a task title")
+    if (!title.trim() || !stage.trim() || !date.trim() || !priorityLevel.trim()) {
+      toast.error("Content cannot be empty.")
       return
     }
 
-    createTask(title, assignedTo, stage, date, priorityLevel)
+    updateTask(id, title, stage, date, priorityLevel, assignedTo)
       .then(res => {
-        toast.success("Task created successfully!")
-        setTitle("")
-        setAssignedTo([])
-        setStage("")
-        setDate("")
-        setPriorityLevel("")
-        fetchTasks()
-        onClose()
+        toast.success("Task successfully updated!")
         console.log(res)
+        onClose()
+        if (fetchTasks) fetchTasks()
+        if (fetchCompletedTasks) fetchCompletedTasks()
+        if (fetchInProgressTask) fetchInProgressTask()
+        if (fetchTodoTask) fetchTodoTask()
       })
       .catch(err => {
-        console.error("Error creating task:", err)
-        toast.error(err.response?.data?.message || "Failed to create task")
+        toast.error("Failed to update task.")
+        console.log(err)
       })
   }
   
   return(
     <div>
       <div className="bg-white w-90 p-4 rounded-md text-gray-600">
-        <h1 className="text-black text-md mb-2 font-bold">ADD TASK</h1>
+        <h1 className="text-black text-md mb-2 font-bold">EDIT TASK</h1>
         
         <div className="flex flex-col mb-2">
           <label htmlFor="Title">Task Title</label>
@@ -72,7 +99,7 @@ export default function AddTask({ onClose, fetchTasks }) {
           />
         </div>
 
-        {/* Checkbox Dropdown */}
+        {/* Checkbox Dropdown - Shows all active users with checked state */}
         <div className="flex flex-col mb-2 relative">
           <label>Assign Task To:</label>
           <button
@@ -82,8 +109,8 @@ export default function AddTask({ onClose, fetchTasks }) {
           >
             <span>
               {assignedTo.length > 0
-                ? `${assignedTo.length} user(s) selected`
-                : "Select users"}
+                ? `${assignedTo.length} user(s) assigned`
+                : "No users assigned"}
             </span>
             <span className="text-gray-500">{isAssignOpen ? "▲" : "▼"}</span>
           </button>
@@ -91,7 +118,7 @@ export default function AddTask({ onClose, fetchTasks }) {
           {isAssignOpen && (
             <div className="absolute top-full left-0 right-0 mt-1 border rounded-sm bg-white max-h-48 overflow-auto shadow-lg z-10">
               {users.length === 0 && (
-                <div className="px-2 py-2 text-sm text-gray-500">No users found</div>
+                <div className="px-2 py-2 text-sm text-gray-500">No active users available</div>
               )}
               {users.map((user) => (
                 <label 
@@ -158,8 +185,8 @@ export default function AddTask({ onClose, fetchTasks }) {
           >
             Cancel
           </button>
-          <button 
-            onClick={HandleSubmit}
+          <button
+            onClick={handleUpdateTask}
             className="bg-green-500 px-4 py-1 rounded-sm text-white hover:bg-green-600 transition-colors"
           >
             Submit

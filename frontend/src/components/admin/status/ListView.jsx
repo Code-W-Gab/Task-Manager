@@ -5,12 +5,14 @@ import { useState } from "react"
 import DeletePopUp from "../../common/DeletePopUp"
 import { deleteTask } from "../../../services/taskService"
 import toast from "react-hot-toast"
+import EditTask from "../tasks/EditTask"
 
 export default function ListView({ tasks, fetchTasks, fetchCompletedTasks, fetchInProgressTask, fetchTodoTask }) {
   const truncate = (text, max = 40) => text && text.length > max ? `${text.slice(0, max)}...` : text
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const [selectedTaskId, setSelectedTaskId] = useState(null)
-
+  
   function handleDeleteTask(id) {
     deleteTask(id)
       .then(res => {
@@ -80,7 +82,10 @@ export default function ListView({ tasks, fetchTasks, fetchCompletedTasks, fetch
               </div>
 
               <div className="flex gap-4">
-                <button className="text-green-500 text-sm">Edit</button>
+                <button className="text-green-500 text-sm" onClick={() => {
+                  setSelectedTaskId(task._id)
+                  setIsEditModalOpen(true)
+                }}>Edit</button>
                 <button className="text-red-500 text-sm" onClick={() => {
                   setSelectedTaskId(task._id)
                   setIsModalOpen(true)
@@ -91,6 +96,23 @@ export default function ListView({ tasks, fetchTasks, fetchCompletedTasks, fetch
         }
       </div>
 
+      {/* Edit Task Modal */}
+      {isEditModalOpen && (
+        <div className="fixed inset-0 flex bg-gray-800/50 items-center justify-center ">
+          <div className="bg-opacity-25">
+            <EditTask 
+              fetchTasks={fetchTasks}
+              fetchCompletedTasks={fetchCompletedTasks}
+              fetchInProgressTask={fetchInProgressTask}
+              fetchTodoTask={fetchTodoTask}
+              onClose={() => setIsEditModalOpen(false)}
+              id={selectedTaskId}
+              />
+          </div>
+        </div>
+      )}
+      
+      {/* Delete Task Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 flex bg-gray-800/50 items-center justify-center ">
           <div className="bg-opacity-25">
