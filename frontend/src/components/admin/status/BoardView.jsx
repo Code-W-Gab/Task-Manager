@@ -6,12 +6,14 @@ import DotBtn from "../../common/3DotBtn"
 import DeletePopUp from "../../common/DeletePopUp"
 import { deleteTask } from "../../../services/taskService"
 import toast from "react-hot-toast"
+import EditTask from "../tasks/EditTask"
 
 export default function BoardView({tasks, fetchTasks, fetchCompletedTasks, fetchInProgressTask, fetchTodoTask}) {
   const [subTask, setSubTask] = useState("No Sub-Task")
   const truncate = (text, max) => text && text.length > max ? `${text.slice(0, max)}...` : text
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedTaskId, setSelectedTaskId] = useState(null)
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false)
 
   function handleDeleteTask(id) {
     deleteTask(id)
@@ -44,7 +46,11 @@ export default function BoardView({tasks, fetchTasks, fetchCompletedTasks, fetch
                   <span>{`${task.PriorityLevel} Priority`}</span>
                 </div>
                 <DotBtn 
-                  onModalOpen={(id) => {
+                  onEditModalOpen={() => {
+                    setSelectedTaskId(task._id)
+                    setIsEditModalOpen(true)
+                  }}
+                  onDeleteModalOpen={(id) => {
                     setSelectedTaskId(id)
                     setIsModalOpen(true)
                   }}
@@ -93,6 +99,23 @@ export default function BoardView({tasks, fetchTasks, fetchCompletedTasks, fetch
         }
       </div>
 
+      {/* Edit Task Modal */}
+      {isEditModalOpen && (
+        <div className="fixed inset-0 flex bg-gray-800/50 items-center justify-center ">
+          <div className="bg-opacity-25">
+            <EditTask 
+              fetchTasks={fetchTasks}
+              fetchCompletedTasks={fetchCompletedTasks}
+              fetchInProgressTask={fetchInProgressTask}
+              fetchTodoTask={fetchTodoTask}
+              onClose={() => setIsEditModalOpen(false)}
+              id={selectedTaskId}
+              />
+          </div>
+        </div>
+      )}
+
+      {/* Delete Task Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 flex bg-gray-800/50 items-center justify-center ">
           <div className="bg-opacity-25">

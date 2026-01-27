@@ -5,7 +5,7 @@ import {
   Trash,
 } from 'lucide-react'
 
-export default function DotBtn({ onModalOpen, taskId }) {
+export default function DotBtn({ onEditModalOpen, onDeleteModalOpen, taskId }) {
   return (
     <div>
       <Menu>
@@ -18,14 +18,17 @@ export default function DotBtn({ onModalOpen, taskId }) {
           anchor="bottom end"
           className="w-30 bg-gray-300 rounded-md">
           <MenuItem>
-            <button className="group flex w-full items-center gap-2 px-3 py-1.5 hover:bg-gray-500 hover:text-white">
+            <button 
+              onClick={() => onEditModalOpen()}
+              className="group flex w-full items-center gap-2 px-3 py-1.5 hover:bg-gray-500 hover:text-white"
+            >
               <Pencil className="size-4"/>
               Edit
             </button>
           </MenuItem>
           <MenuItem>
             <button 
-              onClick={() => onModalOpen(taskId)}
+              onClick={() => onDeleteModalOpen(taskId)}
               className="group flex w-full items-center gap-2 px-3 py-1.5 hover:bg-gray-500 hover:text-white"
             >
               <Trash className="size-4"/>

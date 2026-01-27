@@ -26,7 +26,7 @@ export default function TeamListView({ users, FetchUser }) {
 
   return(
     <div className="bg-white p-2 rounded-sm mt-5">
-      <div className="grid grid-cols-[repeat(3,2fr)_repeat(3,1fr)] mb-2">
+      <div className="grid grid-cols-[repeat(4,2fr)_repeat(2,1fr)] mb-2">
         <p>Full Name</p>
         <p>Title</p>
         <p>Email</p>
@@ -39,7 +39,7 @@ export default function TeamListView({ users, FetchUser }) {
 
       { 
       users.map(user => (
-        <div key={user._id} className="grid items-center grid-cols-[repeat(3,2fr)_repeat(3,1fr)] mb-2 pb-1 border-b border-gray-300 text-gray-500 text-sm">
+        <div key={user._id} className="grid items-center grid-cols-[repeat(4,2fr)_repeat(2,1fr)] mb-2 pb-1 border-b border-gray-300 text-gray-500 text-sm">
           <div className="flex items-center gap-2">
             <div className="size-7 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-semibold">
               {getInitials(user.FullName)}
