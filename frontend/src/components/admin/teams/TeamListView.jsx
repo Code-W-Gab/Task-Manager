@@ -49,7 +49,7 @@ export default function TeamListView({ users, FetchUser }) {
           <p>{user.Title}</p>
           <p>{user.Email}</p>
           <p>{user.Role}</p>
-          <p className={`${user.Active === "Active" ? "text-blue-600" : "text-orange-600" } font-bold`}>{user.Active}</p>
+          <span><p className={`${user.Active === "Active" ? "bg-blue-300" : "bg-orange-300"} inline rounded-2xl px-4 py-1 text-gray-500`}>{user.Active}</p></span>
           <div className="flex gap-4">
             <button 
               className="text-green-500 text-sm"
