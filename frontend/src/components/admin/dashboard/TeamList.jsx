@@ -17,7 +17,7 @@ export default function TeamList() {
   }, [])
 
   return(
-    <div className="bg-white p-2 rounded-sm mt-10">
+    <div className="bg-white p-4 rounded-sm mt-10">
       <div className="grid grid-cols-[2fr_repeat(2,1fr)] mb-2 font-bold text-sm">
         <p>Full Name</p>
         <p>Status</p>

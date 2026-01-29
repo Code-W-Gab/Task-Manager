@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import SubTaskSchema from "./SubTaskSchema.mjs";
 
 const TaskSchema = new mongoose.Schema({
   Title: {
@@ -25,7 +26,8 @@ const TaskSchema = new mongoose.Schema({
     required: true,
     enum: ["Normal", "Medium", "High"],
     default: "Normal"
-  }
+  }, 
+  SubTasks: [SubTaskSchema]
 }, { timestamps: true });
 
 export default mongoose.model("Task", TaskSchema);

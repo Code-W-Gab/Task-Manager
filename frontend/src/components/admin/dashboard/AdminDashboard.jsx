@@ -8,7 +8,9 @@ export default function AdminDashboard() {
       <Tracker/>
       <div className="grid grid-cols-[2fr_1.1fr] gap-4">
         <TaskList/>
-        <TeamList/>
+        <div>
+          <TeamList/>
+        </div>
       </div>
     </div>
   )

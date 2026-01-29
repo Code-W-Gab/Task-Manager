@@ -1,11 +1,12 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import {
+  Plus,
   Ellipsis,
   Pencil,
   Trash,
 } from 'lucide-react'
 
-export default function DotBtn({ onEditModalOpen, onDeleteModalOpen, taskId }) {
+export default function DotBtn({ onSubTaskModalOpen, onEditModalOpen, onDeleteModalOpen, taskId }) {
   return (
     <div>
       <Menu>
@@ -16,7 +17,7 @@ export default function DotBtn({ onEditModalOpen, onDeleteModalOpen, taskId }) {
         <MenuItems
           transition
           anchor="bottom end"
-          className="w-30 bg-gray-300 rounded-md">
+          className="w-35 bg-gray-300 rounded-md">
           <MenuItem>
             <button 
               onClick={() => onEditModalOpen()}
@@ -33,6 +34,15 @@ export default function DotBtn({ onEditModalOpen, onDeleteModalOpen, taskId }) {
             >
               <Trash className="size-4"/>
               Delete
+            </button>
+          </MenuItem>
+          <MenuItem>
+            <button 
+              onClick={onSubTaskModalOpen}
+              className="group flex w-full items-center gap-2 px-3 py-1.5 hover:bg-gray-500 hover:text-white text-sm"
+            >
+              <Plus className="size-4"/>
+              Add Sub-Task
             </button>
           </MenuItem>
         </MenuItems>

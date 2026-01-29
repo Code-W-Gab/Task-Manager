@@ -19,7 +19,7 @@ export default function TaskList() {
   }, [])
 
   return(
-    <div className="bg-white p-2 rounded-sm mt-10">
+    <div className="bg-white p-4 rounded-sm mt-10">
       <div className="grid grid-cols-[2fr_repeat(3,1fr)] mb-2 font-bold text-sm">
         <p>Task Title</p>
         <p>Priority</p>

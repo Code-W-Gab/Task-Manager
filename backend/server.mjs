@@ -5,6 +5,7 @@ import cors from 'cors'
 import connectDB from './config/db.mjs'
 import TaskRoutes from './routes/TaskRoutes.mjs'
 import TeamRoutes from './routes/TeamRoutes.mjs'
+import SubTaskRoutes from './routes/SubTaskRoutes.mjs'
 
 const app = express()
 app.use(express.json())
@@ -14,7 +15,7 @@ app.use(cors())
 connectDB()
 
 // Routes
-app.use('/task', TaskRoutes)
+app.use('/task', TaskRoutes, SubTaskRoutes)
 app.use('/user', TeamRoutes)
 
 // Global Error Handler
