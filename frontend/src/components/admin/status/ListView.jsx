@@ -33,7 +33,7 @@ export default function ListView({ tasks, fetchTasks, fetchCompletedTasks, fetch
   return(
     <div className="min-h-screen">
       <div className="bg-white p-2 rounded-sm">
-        <div className="grid grid-cols-[4fr_2fr_repeat(3,1fr)] mb-2">
+        <div className="grid grid-cols-[4fr_2fr_repeat(3,1fr)] mb-2 font-semibold">
           <p>Task Title</p>
           <p>Priority</p>
           <p>Due</p>

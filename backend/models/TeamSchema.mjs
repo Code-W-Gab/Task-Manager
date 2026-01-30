@@ -16,6 +16,10 @@ const TeamSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
+  Password: {
+    type: String,
+    required: true
+  },
   Role: {
     type: String,
     required: true,

@@ -91,7 +91,7 @@ export default function EditUser({ id, onClose, FetchUser }) {
           onChange={(e) => setStatus(e.target.value)}
         >
           <option value="Active">Active</option>
-          <option value="Disable">Disable</option>
+          <option value="Disable">  Disable</option>
         </select>
       </div>
       {/* Buttons */}

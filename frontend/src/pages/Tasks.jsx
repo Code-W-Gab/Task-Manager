@@ -3,21 +3,37 @@ import AdminTask from "../components/admin/tasks/AdminTask"
 import Navigation from "../components/common/Navigation"
 import AddTask from "../components/admin/tasks/AddTask"
 import { getAllTask } from "../services/taskService"
+import LoadingSpinner from "../components/common/LoadingSpinner"
 
 export default function Tasks() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [tasks, setTasks] = useState([])
+  const [loading, setLoading] = useState(true)
 
   const fetchTasks = () => {
+    setLoading(true)
     getAllTask()
-      .then(res => setTasks(res.data))
-      .catch(err => console.log(err))
+      .then(res => {
+        setTasks(res.data)
+        setLoading(false)
+      })
+      .catch(err => {
+        console.log(err)
+        setLoading(false)
+      })
   }
 
   useEffect(() => {
     fetchTasks()
   }, [])
   
+  if (loading) {
+    return (
+      <Navigation>
+        <LoadingSpinner/>
+      </Navigation>
+    )
+  }
 
   return (
     <Navigation>

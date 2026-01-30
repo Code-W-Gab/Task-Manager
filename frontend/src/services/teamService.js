@@ -1,10 +1,11 @@
 import api from "../api/axios"
 
 // Create a new user
-export const createUser = (fullName, title, email, role ) => api.post('/user/create', { 
+export const createUser = (fullName, title, email, password, role ) => api.post('/user/create', { 
   FullName: fullName, 
   Title: title, 
   Email: email, 
+  Password: password,
   Role: role 
 })
 

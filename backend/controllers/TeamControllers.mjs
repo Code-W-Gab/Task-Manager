@@ -1,19 +1,24 @@
 import Team from "../models/TeamSchema.mjs";
+import bcrypt from 'bcrypt'
 
 const TeamController = {
   // Create New User
   async createUser (req, res, next) {
     try {
-      const { FullName, Title, Email, Role } = req.body
+      const { FullName, Title, Email, Password, Role } = req.body
 
       // If User Already Exist Try Another Email
       const userExist = await Team.findOne({Email})
       if (userExist) return res.status(400).json({ message: "User already exists"})
 
+      // Hash Password (encrypt)
+      const hashedPassword = await bcrypt.hash(Password, 10);
+
       const newUser = new Team({
         FullName,
         Title,
         Email,
+        Password: hashedPassword,
         Role
       })
       await newUser.save()

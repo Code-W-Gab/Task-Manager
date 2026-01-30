@@ -3,20 +3,37 @@ import AdminTeams from "../components/admin/teams/AdminTeams";
 import Navigation from "../components/common/Navigation";
 import AddNewUser from "../components/admin/teams/AddNewUser";
 import { getAllUser } from "../services/teamService";
+import LoadingSpinner from "../components/common/LoadingSpinner";
 
 export default function Team() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true)
 
   function FetchUser() {
+    setLoading(true)
     getAllUser()
-      .then(res => setUsers(res.data))
-      .catch(err => console.log(err))
-  }
+      .then(res => {
+        setLoading(false)
+        setUsers(res.data)
+      })
+      .catch(err => {
+        setLoading(false)
+        console.log(err)
+      })
+    }
 
   useEffect(() => {
     FetchUser()
   }, [])
+
+  if (loading) {
+      return (
+        <Navigation>
+          <LoadingSpinner/>
+        </Navigation>
+      )
+    }
 
   return (
     <Navigation>

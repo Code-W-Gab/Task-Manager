@@ -6,17 +6,18 @@ export default function AddNewUser({ onClose, FetchUser }) {
   const [fullName, setFullName] = useState("")
   const [title, setTitle] = useState("")
   const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
   const [role, setRole] = useState("")
 
   function handleCreateUser(e) {
     e.preventDefault() // Prevent default form action
     
-    if (!fullName.trim() || !title.trim() || !email.trim() || !role.trim()) {
+    if (!fullName.trim() || !title.trim() || !email.trim() || !role.trim() || !password.trim()) {
       toast.error("FullName, Title, Email and Role cannot be empty!")
       return
     }
 
-    createUser(fullName, title, email, role)
+    createUser(fullName, title, email, password, role)
       .then(res => {
         toast.success("User Successfully Created!")
         onClose() // Close modal on success
@@ -57,6 +58,15 @@ export default function AddNewUser({ onClose, FetchUser }) {
         placeholder="email@gmail.com"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        className="border px-2 py-1.5 rounded-sm" />
+      </div>
+      <div className="flex flex-col mb-2">
+        <label>Password</label>
+        <input 
+        type="password" 
+        placeholder="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
         className="border px-2 py-1.5 rounded-sm" />
       </div>
       <div className="flex flex-col mb-2">

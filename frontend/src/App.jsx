@@ -3,7 +3,6 @@ import Completed from "./pages/Completed"
 import Dashboard from "./pages/Dashboard"
 import InProgress from "./pages/In-Progress"
 import Login from "./pages/Login"
-import Register from "./pages/Register"
 import Tasks from "./pages/Tasks"
 import Team from "./pages/Team"
 import ToDo from "./pages/ToDo"
@@ -26,7 +25,6 @@ function App() {
         </Route>
         
         <Route path="/login" element={<Login/>}/>
-        <Route path="/register" element={<Register/>}/>
       </Routes>
     </main>
   )

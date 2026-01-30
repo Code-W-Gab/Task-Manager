@@ -6,6 +6,7 @@ import connectDB from './config/db.mjs'
 import TaskRoutes from './routes/TaskRoutes.mjs'
 import TeamRoutes from './routes/TeamRoutes.mjs'
 import SubTaskRoutes from './routes/SubTaskRoutes.mjs'
+import AuthRoutes from './routes/AuthRoutes.mjs'
 
 const app = express()
 app.use(express.json())
@@ -16,7 +17,7 @@ connectDB()
 
 // Routes
 app.use('/task', TaskRoutes, SubTaskRoutes)
-app.use('/user', TeamRoutes)
+app.use('/user', TeamRoutes, AuthRoutes)
 
 // Global Error Handler
 app.use((err, req, res, next) => {

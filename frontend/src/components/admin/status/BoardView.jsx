@@ -95,7 +95,7 @@ export default function BoardView({tasks, fetchTasks, fetchCompletedTasks, fetch
                 {
                   task.SubTasks.map(subTask => (
                     <div key={subTask._id} className="mt-2">
-                      <span className="font-bold text-sm">{subTask.Title}</span>
+                      <span className="font-semibold text-sm ">{subTask.Title}</span>
                       <div className=" text-sm flex items-center gap-8 ml-2">
                         <p className="text-gray-400">{formatDate(subTask.Date)}</p>
                         <p className="bg-blue-100 px-4 py-1 rounded-2xl text-blue-500 font-semibold text-xs">{subTask.Tag}</p>
