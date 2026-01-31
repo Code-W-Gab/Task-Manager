@@ -29,7 +29,12 @@ const TeamSchema = new mongoose.Schema({
     required: true,
     enum: ["Active", "Disable"],
     default: "Active"
-  }
+  }, 
+  UserRole: {
+    type: String,
+    enum: ["user", "admin"],
+    default: "user",
+  },
 }, { timestamps: true });
 
 export default mongoose.model("Teams", TeamSchema);

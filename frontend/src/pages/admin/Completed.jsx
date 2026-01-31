@@ -1,6 +1,6 @@
-import Navigation from "../components/common/Navigation"
-import AdminCompleted from "../components/admin/completed/adminCompleted"
-import { getAllTask } from "../services/taskService"
+import Navigation from "../../components/common/Navigation"
+import AdminCompleted from "../../components/admin/completed/adminCompleted"
+import { getAllTask } from "../../services/taskService"
 import { useEffect, useState } from "react"
 
 export default function Completed() {

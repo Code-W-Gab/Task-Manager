@@ -18,11 +18,14 @@ export default function LoginPage() {
 
     Login(email, password)
       .then(res => {
+        // Save token
+        localStorage.setItem("token", res.data.token);
         setEmail("")
         setPassword("")
         toast.success("Successfully Login!")
-        console.log(res)
-        navigate("/dashboard")
+        console.log(res.data.role)
+        if (res.data.role !== "admin") return navigate('/user/dashboard')
+        navigate('/admin/dashboard')
       })
       .catch(err => {
         console.log(err)

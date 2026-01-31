@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import AdminTodo from "../components/admin/todo/AdminTodo";
-import Navigation from "../components/common/Navigation";
-import { getAllTask } from "../services/taskService";
+import AdminTodo from '../../components/admin/todo/AdminTodo'
+import Navigation from "../../components/common/Navigation";
+import { getAllTask } from "../../services/taskService";
 
 export default function ToDo() {
   const [todoTasks, setTodoTasks] = useState([])

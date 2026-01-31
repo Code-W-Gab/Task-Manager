@@ -1,30 +1,47 @@
 import { Navigate, Route, Routes } from "react-router-dom"
-import Completed from "./pages/Completed"
-import Dashboard from "./pages/Dashboard"
-import InProgress from "./pages/In-Progress"
-import Login from "./pages/Login"
-import Tasks from "./pages/Tasks"
-import Team from "./pages/Team"
-import ToDo from "./pages/ToDo"
-import Trash from "./pages/Trash"
+// Admin
+import Completed from "./pages/admin/Completed"
+import Dashboard from "./pages/admin/Dashboard"
+import InProgress from "./pages/admin/In-Progress"
+import Tasks from "./pages/admin/Tasks"
+import Team from "./pages/admin/Team"
+import ToDo from "./pages/admin/ToDo"
+import Trash from "./pages/admin/Trash"
+// User
+import UserDashboard from "./pages/user/UserDashboard"
+import UserCompleted from "./pages/user/UserCompleted"
+import UserInProgress from "./pages/user/UserInProgress"
+import UserTodo from "./pages/user/UserTodo"
+import UserTask from "./pages/user/UserTask"
+// Auth
+import Login from "./pages/auth/Login"
 
 function App() {
 
   return (
     <main>
       <Routes>
+        {/* Admin */}
         <Route>
-          <Route path="/" element={<Navigate to='/dashboard'/>}/>
-          <Route path="/dashboard" element={<Dashboard/>}/>
-          <Route path="/completed/status" element={<Completed/>}/>
-          <Route path="/in-progress/status" element={<InProgress/>}/>
-          <Route path="/todo/status" element={<ToDo/>}/>
-          <Route path="/tasks" element={<Tasks/>}/>
-          <Route path="/team" element={<Team/>}/>
-          <Route path="/trash" element={<Trash/>}/>
+          <Route path="/" element={<Navigate to='/auth/login'/>}/>
+          <Route path="/admin/dashboard" element={<Dashboard/>}/>
+          <Route path="/admin/completed/status" element={<Completed/>}/>
+          <Route path="/admin/in-progress/status" element={<InProgress/>}/>
+          <Route path="/admin/todo/status" element={<ToDo/>}/>
+          <Route path="/admin/tasks" element={<Tasks/>}/>
+          <Route path="/admin/team" element={<Team/>}/>
+          <Route path="/admin/trash" element={<Trash/>}/>
         </Route>
-        
-        <Route path="/login" element={<Login/>}/>
+        {/* Auth */}
+        <Route path="/auth/login" element={<Login/>}/>
+        {/* User */}
+        <Route>
+          <Route path="/user/dashboard" element={<UserDashboard/>}/>
+          <Route path="/user/completed/status" element={<UserCompleted/>}/>
+          <Route path="/user/in-progress/status" element={<UserInProgress/>}/>
+          <Route path="/user/todo/status" element={<UserTodo/>}/>
+          <Route path="/user/task" element={<UserTask/>}/>
+        </Route>
       </Routes>
     </main>
   )

@@ -5,13 +5,13 @@ export default function SideBar() {
   const location = useLocation();
   
   const navItems = [
-    { to: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
-    { to: "/tasks", icon: ClipboardCheck, label: "Tasks" },
-    { to: "/completed/status", icon: CircleCheck, label: "Completed" },
-    { to: "/in-progress/status", icon: CalendarCheck2, label: "In-Progress" },
-    { to: "/todo/status", icon: ListChecks, label: "To-Do" },
-    { to: "/team", icon: Users, label: "Team" },
-    { to: "/trash", icon: Trash2, label: "Trash" },
+    { to: "/admin/dashboard", icon: LayoutDashboard, label: "Dashboard" },
+    { to: "/admin/tasks", icon: ClipboardCheck, label: "Tasks" },
+    { to: "/admin/completed/status", icon: CircleCheck, label: "Completed" },
+    { to: "/admin/in-progress/status", icon: CalendarCheck2, label: "In-Progress" },
+    { to: "/admin/todo/status", icon: ListChecks, label: "To-Do" },
+    { to: "/admin/team", icon: Users, label: "Team" },
+    { to: "/admin/trash", icon: Trash2, label: "Trash" },
   ];
 
   return (
