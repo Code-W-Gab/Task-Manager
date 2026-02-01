@@ -17,7 +17,8 @@ export default function DotBtn({ onSubTaskModalOpen, onEditModalOpen, onDeleteMo
         <MenuItems
           transition
           anchor="bottom end"
-          className="w-35 bg-gray-300 rounded-md">
+          className="w-35 bg-gray-300 rounded-md"
+        >
           <MenuItem>
             <button 
               onClick={() => onEditModalOpen()}

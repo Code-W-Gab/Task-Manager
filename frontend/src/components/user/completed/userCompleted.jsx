@@ -1,5 +1,5 @@
 export default function UserCompleted() {
   return(
-    <div>Completed</div>
+    <div className="bg-gray-200">Completed</div>
   )
 }

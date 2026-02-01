@@ -8,13 +8,14 @@ import Team from "./pages/admin/Team"
 import ToDo from "./pages/admin/ToDo"
 import Trash from "./pages/admin/Trash"
 // User
-import UserDashboard from "./pages/user/UserDashboard"
-import UserCompleted from "./pages/user/UserCompleted"
-import UserInProgress from "./pages/user/UserInProgress"
-import UserTodo from "./pages/user/UserTodo"
-import UserTask from "./pages/user/UserTask"
+import UserDashboardPage from "./pages/user/UserDashboardPage"
+import UserCompletedPage from "./pages/user/UserCompletedPage"
+import UserInProgressPage from "./pages/user/UserInProgressPage"
+import UserTodoPage from "./pages/user/UserTodoPage"
+import UserTaskPage from "./pages/user/UserTaskPage"
 // Auth
 import Login from "./pages/auth/Login"
+import PrivateRoute from "./components/common/PrivateRoute"
 
 function App() {
 
@@ -24,23 +25,71 @@ function App() {
         {/* Admin */}
         <Route>
           <Route path="/" element={<Navigate to='/auth/login'/>}/>
-          <Route path="/admin/dashboard" element={<Dashboard/>}/>
-          <Route path="/admin/completed/status" element={<Completed/>}/>
-          <Route path="/admin/in-progress/status" element={<InProgress/>}/>
-          <Route path="/admin/todo/status" element={<ToDo/>}/>
-          <Route path="/admin/tasks" element={<Tasks/>}/>
-          <Route path="/admin/team" element={<Team/>}/>
-          <Route path="/admin/trash" element={<Trash/>}/>
+          <Route path="/admin/dashboard" element={
+            <PrivateRoute>
+              <Dashboard/>
+            </PrivateRoute>
+          }/>
+          <Route path="/admin/completed/status" element={
+            <PrivateRoute>
+              <Completed/>
+            </PrivateRoute>
+          }/>
+          <Route path="/admin/in-progress/status" element={
+            <PrivateRoute>
+              <InProgress/>
+            </PrivateRoute>
+          }/>
+          <Route path="/admin/todo/status" element={
+            <PrivateRoute>
+              <ToDo/>
+            </PrivateRoute>
+          }/>
+          <Route path="/admin/tasks" element={
+            <PrivateRoute>
+              <Tasks/>
+            </PrivateRoute>
+          }/>
+          <Route path="/admin/team" element={
+            <PrivateRoute>
+              <Team/>
+            </PrivateRoute>
+          }/>
+          <Route path="/admin/trash" element={
+            <PrivateRoute>
+              <Trash/>
+            </PrivateRoute>
+          }/>
         </Route>
         {/* Auth */}
         <Route path="/auth/login" element={<Login/>}/>
         {/* User */}
         <Route>
-          <Route path="/user/dashboard" element={<UserDashboard/>}/>
-          <Route path="/user/completed/status" element={<UserCompleted/>}/>
-          <Route path="/user/in-progress/status" element={<UserInProgress/>}/>
-          <Route path="/user/todo/status" element={<UserTodo/>}/>
-          <Route path="/user/task" element={<UserTask/>}/>
+          <Route path="/user/dashboard" element={
+            <PrivateRoute>
+              <UserDashboardPage/>
+            </PrivateRoute>
+          }/>
+          <Route path="/user/completed/status" element={
+            <PrivateRoute>
+              <UserCompletedPage/>
+            </PrivateRoute>
+          }/>
+          <Route path="/user/in-progress/status" element={
+            <PrivateRoute>
+              <UserInProgressPage/>
+            </PrivateRoute>
+          }/>
+          <Route path="/user/todo/status" element={
+            <PrivateRoute>
+              <UserTodoPage/>
+            </PrivateRoute>
+          }/>
+          <Route path="/user/tasks" element={
+            <PrivateRoute>
+              <UserTaskPage/>
+            </PrivateRoute>
+          }/>
         </Route>
       </Routes>
     </main>

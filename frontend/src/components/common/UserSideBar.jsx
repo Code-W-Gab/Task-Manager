@@ -1,17 +1,15 @@
 import { CalendarCheck2, CircleCheck, CircleCheckBig, ClipboardCheck, LayoutDashboard, ListChecks, Trash2, Users } from "lucide-react"
 import { Link, useLocation } from "react-router-dom"
 
-export default function SideBar() {
+export default function UserSideBar() {
   const location = useLocation();
   
   const navItems = [
-    { to: "/admin/dashboard", icon: LayoutDashboard, label: "Dashboard" },
-    { to: "/admin/tasks", icon: ClipboardCheck, label: "Tasks" },
-    { to: "/admin/completed/status", icon: CircleCheck, label: "Completed" },
-    { to: "/admin/in-progress/status", icon: CalendarCheck2, label: "In-Progress" },
-    { to: "/admin/todo/status", icon: ListChecks, label: "To-Do" },
-    { to: "/admin/team", icon: Users, label: "Team" },
-    { to: "/admin/trash", icon: Trash2, label: "Trash" },
+    { to: "/user/dashboard", icon: LayoutDashboard, label: "Dashboard" },
+    { to: "/user/tasks", icon: ClipboardCheck, label: "Tasks" },
+    { to: "/user/completed/status", icon: CircleCheck, label: "Completed" },
+    { to: "/user/in-progress/status", icon: CalendarCheck2, label: "In-Progress" },
+    { to: "/user/todo/status", icon: ListChecks, label: "To-Do" },
   ];
 
   return (
