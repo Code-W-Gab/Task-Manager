@@ -1,5 +1,7 @@
+import UserView from "../status/UserView";
+
 export default function UserTask() {
   return(
-    <div>Task</div>
+    <UserView Title={"Tasks"}/>
   )
 }
