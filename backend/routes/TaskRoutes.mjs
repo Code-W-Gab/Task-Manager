@@ -1,5 +1,5 @@
 import express from 'express'
-import { createTask, getAllTasks, getTaskById, updateTask, deleteTask } from '../controllers/TaskControllers.mjs'
+import { createTask, getAllTasks, getTaskById, updateTask, deleteTask } from '../controllers/admin/TaskControllers.mjs'
 import auth from '../middleware/auth.mjs'
 import isAdmin from '../middleware/isAdmin.mjs'
 

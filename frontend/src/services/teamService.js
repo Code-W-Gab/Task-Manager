@@ -1,7 +1,7 @@
 import api from "../api/axios"
 
 // Create a new user
-export const createUser = (fullName, title, email, password, role ) => api.post('/user/create', { 
+export const createUser = (fullName, title, email, password, role ) => api.post('/admin/team/create', { 
   FullName: fullName, 
   Title: title, 
   Email: email, 
@@ -10,13 +10,13 @@ export const createUser = (fullName, title, email, password, role ) => api.post(
 })
 
 // Get All user
-export const getAllUser = () => api.get('/user/getAll')
+export const getAllUser = () => api.get('/admin/team/getAll')
 
 // Delete user
-export const deleteUser = (id) => api.delete(`/user/${id}`)
+export const deleteUser = (id) => api.delete(`/admin/team/${id}`)
 
 // Update user
-export const updateUser = (id, fullName, title, email, role, status) => api.put(`/user/${id}`, {
+export const updateUser = (id, fullName, title, email, role, status) => api.put(`/admin/team/${id}`, {
   FullName: fullName,
   Title: title,
   Email: email,
@@ -25,4 +25,4 @@ export const updateUser = (id, fullName, title, email, role, status) => api.put(
 })
 
 // Get user by Id
-export const getUserById = (id) => api.get(`/user/${id}`)
+export const getUserById = (id) => api.get(`/admin/team/${id}`)

@@ -1,4 +1,4 @@
-import Task from "../models/TaskSchema.mjs";
+import Task from "../../models/TaskSchema.mjs";
 
 // Add subtask to a task
 export const addSubTask = async (req, res, next) => {

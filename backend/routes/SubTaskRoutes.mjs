@@ -1,5 +1,5 @@
 import express from 'express'
-import { addSubTask, updateSubTask, deleteSubTask } from '../controllers/SubTaskControllers.mjs'
+import { addSubTask, updateSubTask, deleteSubTask } from '../controllers/admin/SubTaskControllers.mjs'
 
 const router = express.Router()
 

@@ -1,4 +1,4 @@
-import Team from "../models/TeamSchema.mjs";
+import Team from "../../models/TeamSchema.mjs";
 import bcrypt from 'bcrypt'
 
 const TeamController = {

@@ -1,4 +1,4 @@
-import Task from '../models/TaskSchema.mjs'
+import Task from '../../models/TaskSchema.mjs'
 
 // Create a new task
 export const createTask = async (req, res, next) => {
@@ -20,15 +20,15 @@ export const createTask = async (req, res, next) => {
   }
 }
 
-// Get all tasks
-export const getAllTasks = async (req, res, next) => {
-  try {
-    const tasks = await Task.find().populate('AssignedTo', 'FullName Email')
-    res.status(200).json(tasks)
-  } catch (error) {
-    next(error)
+  // Get all tasks
+  export const getAllTasks = async (req, res, next) => {
+    try {
+      const tasks = await Task.find().populate('AssignedTo', 'FullName Email')
+      res.status(200).json(tasks)
+    } catch (error) {
+      next(error)
+    }
   }
-}
 
 // Get task by ID
 export const getTaskById = async (req, res, next) => {

@@ -1,4 +1,4 @@
-import TeamSchema from '../models/TeamSchema.mjs';
+import TeamSchema from '../../models/TeamSchema.mjs';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'
 
