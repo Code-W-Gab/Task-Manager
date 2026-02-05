@@ -1,5 +1,7 @@
-export default function UserTodo() {
+import UserView from "../status/UserView";
+
+export default function UserTodo({ todoTasks }) {
   return(
-    <div>Todo</div>
+    <UserView Title={"To do Task"} tasks={todoTasks}/>
   )
 }

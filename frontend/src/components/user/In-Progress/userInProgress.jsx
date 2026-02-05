@@ -1,5 +1,7 @@
-export default function UserInProgress() {
+import UserView from "../status/UserView";
+
+export default function UserInProgress({inProgressTask}) {
   return(
-    <div>In Progress</div>
+    <UserView Title={"In Progress Task"} tasks={inProgressTask}/>
   )
 }

@@ -1,5 +1,7 @@
-export default function UserCompleted() {
+import UserView from "../status/UserView";
+
+export default function UserCompleted({completedTasks}) {
   return(
-    <div className="bg-gray-200 rounded-sm p-5">Completed</div>
+    <UserView Title={"Completed Task"} tasks={completedTasks}/>
   )
 }
