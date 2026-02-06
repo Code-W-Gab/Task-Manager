@@ -35,6 +35,16 @@ const userTaskController = {
     } catch (error) {
       next(error)
     }
+  },
+
+  async deleteTask (req, res, next) {
+    try {
+      const task  = await Task.findByIdAndDelete(req.params.id)
+      if(!task) return res.status(400).json({ message: "Task not found"})
+      res.status(200).json({ message: "Task successfully deleted!"})
+    } catch (error) {
+      next(error)
+    }
   }
 }
 

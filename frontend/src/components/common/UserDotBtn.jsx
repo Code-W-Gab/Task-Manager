@@ -6,7 +6,7 @@ import {
   Trash,
 } from 'lucide-react'
 
-export default function UserDotBtn({onOpenEditTaskModal}) {
+export default function UserDotBtn({onOpenEditTaskModal, onOpenDeleteTaskModal}) {
   return (
     <div>
       <Menu>
@@ -30,6 +30,7 @@ export default function UserDotBtn({onOpenEditTaskModal}) {
           </MenuItem>
           <MenuItem>
             <button 
+              onClick={() => onOpenDeleteTaskModal()}
               className="group flex w-full items-center gap-2 px-3 py-1.5 hover:bg-gray-500 hover:text-white"
             >
               <Trash className="size-4"/>

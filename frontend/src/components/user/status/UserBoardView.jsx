@@ -4,12 +4,33 @@ import { formatDate } from "../../../utils/Date"
 import { getInitials } from "../../../utils/userLogo"
 import { useState } from "react"
 import UserEditTask from "./UserEditTask"
+import DeletePopUp from "../../common/DeletePopUp"
+import { deleteTask } from "../../../services/userTaskService"
+import toast from "react-hot-toast"
 
 export default function UserBoardView({ tasks, fetchTasks, fetchTodoTask, fetchInProgressTask, fetchCompletedTasks }) {
   const truncate = (text, max) => text && text.length > max ? `${text.slice(0, max)}...` : text
   const [selectedTaskId, setSelectedTaskId] = useState(null)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
-  console.log(selectedTaskId)
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+
+
+  function handleDeleteTask(id) {
+      deleteTask(id)
+        .then(res => {
+          toast.success("Task Successfully Deleted!")
+          console.log(res)
+          setIsDeleteModalOpen(false)
+          if (fetchTasks) fetchTasks()
+          if (fetchCompletedTasks) fetchCompletedTasks()
+          if (fetchInProgressTask) fetchInProgressTask()
+          if (fetchTodoTask) fetchTodoTask()
+        })
+        .catch(err => {
+          toast.error("Failed to delete task")
+          console.log(err)
+        })
+    }
 
   return(
     <div>
@@ -29,6 +50,10 @@ export default function UserBoardView({ tasks, fetchTasks, fetchTodoTask, fetchI
                     onOpenEditTaskModal={() => {
                       setSelectedTaskId(task._id)
                       setIsEditModalOpen(true)
+                    }}
+                    onOpenDeleteTaskModal={() => {
+                      setIsDeleteModalOpen(true)
+                      setSelectedTaskId(task._id)
                     }}
                   />
                 </div>
@@ -96,6 +121,20 @@ export default function UserBoardView({ tasks, fetchTasks, fetchTodoTask, fetchI
           </div>
         </div>
       )}
+
+      {/* Delete Task Modal */}
+      {isDeleteModalOpen && (
+        <div className="fixed inset-0 flex bg-gray-800/50 items-center justify-center">
+          <div className="bg-opacity-25">
+            <DeletePopUp 
+              setIsModalOpen={setIsDeleteModalOpen}
+              title={"Task"}
+              onDelete={() => handleDeleteTask(selectedTaskId)}
+            />
+          </div>
+        </div>
+      )}
+
     </div>
   )
 }

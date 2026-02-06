@@ -1,13 +1,34 @@
+import { ArrowUpWideNarrow, ChevronUp, ChevronsUp, Circle } from "lucide-react"
+import { useState } from "react"
+import toast from "react-hot-toast"
+import { deleteTask } from "../../../services/userTaskService"
 import { formatDate } from "../../../utils/Date"
 import { getInitials } from "../../../utils/userLogo"
-import { ChevronUp, ChevronsUp, ArrowUpWideNarrow, Circle, Ellipsis, Plus } from "lucide-react"
-import { useState } from "react"
+import DeletePopUp from "../../common/DeletePopUp"
 import UserEditTask from "./UserEditTask"
 
 export default function UserListView({ tasks, fetchTasks, fetchTodoTask, fetchInProgressTask, fetchCompletedTasks }) {
   const truncate = (text, max) => text && text.length > max ? `${text.slice(0, max)}...` : text
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const [selectedTaskId, setSelectedTaskId] = useState(null)
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+
+  function handleDeleteTask(id) {
+    deleteTask(id)
+      .then(res => {
+        toast.success("Task Successfully Deleted!")
+        console.log(res)
+        setIsDeleteModalOpen(false)
+        if (fetchTasks) fetchTasks()
+        if (fetchCompletedTasks) fetchCompletedTasks()
+        if (fetchInProgressTask) fetchInProgressTask()
+        if (fetchTodoTask) fetchTodoTask()
+      })
+      .catch(err => {
+        toast.error("Failed to delete task")
+        console.log(err)
+      })
+  }
 
   return(
     <div className="min-h-screen">
@@ -65,7 +86,10 @@ export default function UserListView({ tasks, fetchTasks, fetchTodoTask, fetchIn
                   setSelectedTaskId(task._id)
                   setIsEditModalOpen(true)
                 }}>Edit</button>
-                <button className="text-red-500 text-sm">Delete</button>
+                <button className="text-red-500 text-sm" onClick={() => {
+                  setSelectedTaskId(task._id)
+                  setIsDeleteModalOpen(true)
+                }}>Delete</button>
               </div>
             </div>
           ))
@@ -84,6 +108,19 @@ export default function UserListView({ tasks, fetchTasks, fetchTodoTask, fetchIn
               fetchInProgressTask={fetchInProgressTask} 
               fetchCompletedTasks={fetchCompletedTasks}
               />
+          </div>
+        </div>
+      )}
+
+      {/* Delete Task Modal */}
+      {isDeleteModalOpen && (
+        <div className="fixed inset-0 flex bg-gray-800/50 items-center justify-center">
+          <div className="bg-opacity-25">
+            <DeletePopUp 
+              setIsModalOpen={setIsDeleteModalOpen}
+              title={"Task"}
+              onDelete={() => handleDeleteTask(selectedTaskId)}
+            />
           </div>
         </div>
       )}

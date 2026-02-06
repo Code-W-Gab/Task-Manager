@@ -26,7 +26,6 @@ export default function UserSideBar() {
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = location.pathname === item.to;
-          console.log(isActive)
           
           return (
             <Link 
