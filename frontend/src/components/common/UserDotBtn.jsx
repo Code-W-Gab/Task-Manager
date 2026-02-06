@@ -6,7 +6,7 @@ import {
   Trash,
 } from 'lucide-react'
 
-export default function DotBtn({ onSubTaskModalOpen, onEditModalOpen, onDeleteModalOpen, taskId }) {
+export default function UserDotBtn({onOpenEditTaskModal}) {
   return (
     <div>
       <Menu>
@@ -21,7 +21,7 @@ export default function DotBtn({ onSubTaskModalOpen, onEditModalOpen, onDeleteMo
         >
           <MenuItem>
             <button 
-              onClick={() => onEditModalOpen()}
+              onClick={() => onOpenEditTaskModal()}
               className="group flex w-full items-center gap-2 px-3 py-1.5 hover:bg-gray-500 hover:text-white"
             >
               <Pencil className="size-4"/>
@@ -30,20 +30,10 @@ export default function DotBtn({ onSubTaskModalOpen, onEditModalOpen, onDeleteMo
           </MenuItem>
           <MenuItem>
             <button 
-              onClick={() => onDeleteModalOpen(taskId)}
               className="group flex w-full items-center gap-2 px-3 py-1.5 hover:bg-gray-500 hover:text-white"
             >
               <Trash className="size-4"/>
               Delete
-            </button>
-          </MenuItem>
-          <MenuItem>
-            <button 
-              onClick={onSubTaskModalOpen}
-              className="group flex w-full items-center gap-2 px-3 py-1.5 hover:bg-gray-500 hover:text-white text-sm"
-            >
-              <Plus className="size-4"/>
-              Add Sub-Task
             </button>
           </MenuItem>
         </MenuItems>

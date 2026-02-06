@@ -21,7 +21,7 @@ export default function UserTaskPage() {
   };
 
   useEffect(() => {
-    fetchMyTasks();
+    fetchMyTasks()
   }, []);
 
   return(

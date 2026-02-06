@@ -3,7 +3,7 @@ import { LayoutDashboard, List } from "lucide-react"
 import UserBoardView from "./UserBoardView"
 import UserListView from "./UserListView"
 
-export default function UserView({Title, tasks, fetchTasks}) {
+export default function UserView({Title, tasks, fetchTasks, fetchTodoTask, fetchInProgressTask, fetchCompletedTasks}) {
   const [activeView, setActiveView] = useState("board")
 
   return (
@@ -28,8 +28,20 @@ export default function UserView({Title, tasks, fetchTasks}) {
       
       {
         activeView === "board" 
-        ? <UserBoardView tasks={tasks} fetchTasks={fetchTasks}/>
-        : <UserListView tasks={tasks} fetchTasks={fetchTasks}/>
+        ? <UserBoardView 
+            tasks={tasks} 
+            fetchTasks={fetchTasks} 
+            fetchTodoTask={fetchTodoTask} 
+            fetchInProgressTask={fetchInProgressTask} 
+            fetchCompletedTasks={fetchCompletedTasks}
+          />
+        : <UserListView 
+            tasks={tasks}  
+            fetchTasks={fetchTasks} 
+            fetchTodoTask={fetchTodoTask} 
+            fetchInProgressTask={fetchInProgressTask} 
+            fetchCompletedTasks={fetchCompletedTasks}
+          />
       }
     </div>
   )

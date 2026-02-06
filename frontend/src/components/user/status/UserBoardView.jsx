@@ -1,10 +1,15 @@
 import { ChevronUp, ChevronsUp, ArrowUpWideNarrow, Circle, Ellipsis, Plus } from "lucide-react"
-import DotBtn from "../../common/3DotBtn"
+import UserDotBtn from "../../common/UserDotBtn"
 import { formatDate } from "../../../utils/Date"
 import { getInitials } from "../../../utils/userLogo"
+import { useState } from "react"
+import UserEditTask from "./UserEditTask"
 
-export default function UserBoardView({ tasks, fetchTasks }) {
+export default function UserBoardView({ tasks, fetchTasks, fetchTodoTask, fetchInProgressTask, fetchCompletedTasks }) {
   const truncate = (text, max) => text && text.length > max ? `${text.slice(0, max)}...` : text
+  const [selectedTaskId, setSelectedTaskId] = useState(null)
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false)
+  console.log(selectedTaskId)
 
   return(
     <div>
@@ -13,16 +18,18 @@ export default function UserBoardView({ tasks, fetchTasks }) {
           tasks.length === 0 
           ? <div>NO TASK ADDED</div>
           : tasks.map(task => (
-            <div>
-              <div key={task._id} className="bg-white p-5 rounded-md">
+            <div key={task._id}>
+              <div  className="bg-white p-5 rounded-md">
                 <div className="flex items-center justify-between mb-2">
                   <div className={`flex items-center gap-1 ${task.PriorityLevel === "Normal" ? "text-green-500" : task.PriorityLevel === "Medium" ? "text-orange-500" : "text-red-500"}`}>
                     {task.PriorityLevel === "Normal" ? <ChevronUp size={20}/> : task.PriorityLevel === "Medium" ? <ChevronsUp size={20}/> : <ArrowUpWideNarrow size={20}/>}
                     <span>{`${task.PriorityLevel} Priority`}</span>
                   </div>
-                  <DotBtn 
-                  
-                    taskId={task._id}
+                  <UserDotBtn  
+                    onOpenEditTaskModal={() => {
+                      setSelectedTaskId(task._id)
+                      setIsEditModalOpen(true)
+                    }}
                   />
                 </div>
                 <div className="flex items-center gap-1 mb-0.5">
@@ -68,16 +75,27 @@ export default function UserBoardView({ tasks, fetchTasks }) {
                     </div>
                   ))
                 }
-                <button
-                  className="flex item  s-center text-gray-400 gap-2 mt-4">
-                  <Plus size={18}/>
-                  <span className="text-sm">ADD SUBTASK</span>
-                </button>
               </div>
             </div>
           ))
         }
       </div>
+
+      {/* Edit Task Modal */}
+      {isEditModalOpen && (
+        <div className="fixed inset-0 flex bg-gray-800/50 items-center justify-center">
+          <div className="bg-opacity-25">
+            <UserEditTask
+              onClose={() => setIsEditModalOpen(false)}
+              id={selectedTaskId}
+              fetchTasks={fetchTasks} 
+              fetchTodoTask={fetchTodoTask} 
+              fetchInProgressTask={fetchInProgressTask} 
+              fetchCompletedTasks={fetchCompletedTasks}
+              />
+          </div>
+        </div>
+      )}
     </div>
   )
 }

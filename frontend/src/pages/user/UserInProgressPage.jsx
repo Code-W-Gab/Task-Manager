@@ -5,14 +5,20 @@ import { getMyTask } from "../../services/userTaskService";
 
 export default function UserInProgressPage() {
   const [inProgressTask, setInProgressTask] = useState([])
+  const [loading, setLoading] = useState(true);
 
   const fetchInProgressTask = () => {
+    setLoading(true)
     getMyTask()
       .then(res => {
         const InProgress = res.data.filter(task => task.Stage === "In-Progress")
         setInProgressTask(InProgress)
+        setLoading(false)
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        setLoading(false)
+        console.log(err)
+    })
   }
 
   useEffect(() => {
@@ -21,7 +27,7 @@ export default function UserInProgressPage() {
 
   return(
     <UserNavigation>
-      <UserInProgress inProgressTask={inProgressTask}/>
+      <UserInProgress inProgressTask={inProgressTask} fetchInProgressTask={fetchInProgressTask} loading={loading}/>
     </UserNavigation>
   )
 }

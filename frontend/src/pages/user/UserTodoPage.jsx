@@ -5,14 +5,20 @@ import { getMyTask } from "../../services/userTaskService";
 
 export default function UserTodoPage() {
   const [todoTasks, setTodoTasks] = useState([])
+  const [loading, setLoading] = useState(true);
 
   const fetchTodoTask = () => {
+    setLoading(true)
     getMyTask()
       .then(res => {
         const todo = res.data.filter(task => task.Stage === "ToDo")
         setTodoTasks(todo)
+        setLoading(false)
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err)
+        setLoading(false)
+    })
   }
 
   useEffect(() => {
@@ -21,7 +27,7 @@ export default function UserTodoPage() {
 
   return(
     <UserNavigation>
-      <UserTodo todoTasks={todoTasks}/>
+      <UserTodo todoTasks={todoTasks} fetchTodoTask={fetchTodoTask} loading={loading}/>
     </UserNavigation>
   )
 }

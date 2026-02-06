@@ -1,9 +1,13 @@
 import { formatDate } from "../../../utils/Date"
 import { getInitials } from "../../../utils/userLogo"
 import { ChevronUp, ChevronsUp, ArrowUpWideNarrow, Circle, Ellipsis, Plus } from "lucide-react"
+import { useState } from "react"
+import UserEditTask from "./UserEditTask"
 
-export default function UserListView({ tasks, fetchTasks }) {
+export default function UserListView({ tasks, fetchTasks, fetchTodoTask, fetchInProgressTask, fetchCompletedTasks }) {
   const truncate = (text, max) => text && text.length > max ? `${text.slice(0, max)}...` : text
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false)
+  const [selectedTaskId, setSelectedTaskId] = useState(null)
 
   return(
     <div className="min-h-screen">
@@ -57,13 +61,33 @@ export default function UserListView({ tasks, fetchTasks }) {
               </div>
 
               <div className="flex gap-4">
-                <button className="text-green-500 text-sm">Edit</button>
+                <button className="text-green-500 text-sm" onClick={() => {
+                  setSelectedTaskId(task._id)
+                  setIsEditModalOpen(true)
+                }}>Edit</button>
                 <button className="text-red-500 text-sm">Delete</button>
               </div>
             </div>
           ))
         }
-      </div>      
+      </div>  
+
+      {/* Edit Task Modal */}
+      {isEditModalOpen && (
+        <div className="fixed inset-0 flex bg-gray-800/50 items-center justify-center">
+          <div className="bg-opacity-25">
+            <UserEditTask
+              onClose={() => setIsEditModalOpen(false)}
+              id={selectedTaskId}
+              fetchTasks={fetchTasks} 
+              fetchTodoTask={fetchTodoTask} 
+              fetchInProgressTask={fetchInProgressTask} 
+              fetchCompletedTasks={fetchCompletedTasks}
+              />
+          </div>
+        </div>
+      )}
+
     </div>
   )
 }

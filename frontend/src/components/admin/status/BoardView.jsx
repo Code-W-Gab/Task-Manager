@@ -2,7 +2,7 @@ import { useState } from "react"
 import { ChevronUp, ChevronsUp, ArrowUpWideNarrow, Circle, Ellipsis, Plus } from "lucide-react"
 import { formatDate } from "../../../utils/Date"
 import { getInitials } from "../../../utils/userLogo"
-import DotBtn from "../../common/3DotBtn"
+import AdminDotBtn from "../../common/AdminDotBtn"
 import DeletePopUp from "../../common/DeletePopUp"
 import { deleteTask } from "../../../services/taskService"
 import toast from "react-hot-toast"
@@ -47,7 +47,7 @@ export default function BoardView({tasks, fetchTasks, fetchCompletedTasks, fetch
                     {task.PriorityLevel === "Normal" ? <ChevronUp size={20}/> : task.PriorityLevel === "Medium" ? <ChevronsUp size={20}/> : <ArrowUpWideNarrow size={20}/>}
                     <span>{`${task.PriorityLevel} Priority`}</span>
                   </div>
-                  <DotBtn 
+                  <AdminDotBtn 
                     onSubTaskModalOpen={() => setIsSubTaskModalOpen(true)}
                     onEditModalOpen={() => {
                       setSelectedTaskId(task._id)
