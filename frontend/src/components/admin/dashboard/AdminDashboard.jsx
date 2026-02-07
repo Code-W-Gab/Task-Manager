@@ -7,7 +7,9 @@ export default function AdminDashboard() {
     <div className="bg-gray-200 h-full rounded-sm p-5">
       <Tracker/>
       <div className="grid grid-cols-[2fr_1.1fr] gap-4">
-        <TaskList/>
+        <div>
+          <TaskList/>
+        </div>
         <div>
           <TeamList/>
         </div>

@@ -44,7 +44,7 @@ export default function ListView({ tasks, fetchTasks, fetchCompletedTasks, fetch
         <hr className="text-gray-300"/>
         {
           tasks.length === 0 
-          ? <div>NO TASK ADDED</div>
+          ? <div></div>
           : tasks.map(task => (
             <div key={task._id} className="grid grid-cols-[4fr_2fr_repeat(3,1fr)] mt-4 border-b border-gray-300 pb-2">
               <div className="flex items-center gap-2 mb-0.5">

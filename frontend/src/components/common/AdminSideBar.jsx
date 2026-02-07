@@ -11,7 +11,6 @@ export default function AdminSideBar() {
     { to: "/admin/in-progress/status", icon: CalendarCheck2, label: "In-Progress" },
     { to: "/admin/todo/status", icon: ListChecks, label: "To-Do" },
     { to: "/admin/team", icon: Users, label: "Team" },
-    { to: "/admin/trash", icon: Trash2, label: "Trash" },
   ];
 
   return (
@@ -28,7 +27,6 @@ export default function AdminSideBar() {
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = location.pathname === item.to;
-          console.log(isActive)
           
           return (
             <Link 

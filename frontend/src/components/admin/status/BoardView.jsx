@@ -38,7 +38,7 @@ export default function BoardView({tasks, fetchTasks, fetchCompletedTasks, fetch
       <div className="grid grid-cols-3 gap-4">
         {
           tasks.length === 0 
-          ? <div>NO TASK ADDED</div>
+          ? <div className="font-bold text-red-500">NO TASK ADDED</div>
           : tasks.map(task => (
             <div>
               <div key={task._id} className="bg-white p-5 rounded-md">

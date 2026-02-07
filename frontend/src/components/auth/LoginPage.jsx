@@ -24,7 +24,7 @@ export default function LoginPage() {
         setPassword("")
         toast.success("Successfully Login!")
         console.log(res.data.role)
-        if (res.data.role !== "admin") return navigate('/user/dashboard')
+        if (res.data.role !== "admin") return navigate('/user/tasks')
         navigate('/admin/dashboard')
       })
       .catch(err => {

@@ -25,6 +25,29 @@ const authController = {
     } catch (error) {
       next(error)
     }
+  },
+
+  async getCurrentUser (req, res, next) {
+    try {
+      const userId = req.user.id // from auth middleware
+      const user = await TeamSchema.findById(userId).select('-Password')
+      
+      if (!user) {
+        return res.status(404).json({ message: "User not found" })
+      }
+      
+      res.status(200).json({
+        id: user._id,
+        fullName: user.FullName,
+        email: user.Email,
+        title: user.Title,
+        role: user.Role,
+        userRole: user.UserRole,
+        active: user.Active
+      })
+    } catch (error) {
+      next(error)
+    }
   }
 }
 

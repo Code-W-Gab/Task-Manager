@@ -1,8 +1,9 @@
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { CircleUser, LogOut } from 'lucide-react'
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
+import { LogOut } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { getInitials } from '../../utils/userLogo';
 
-export default function Logout() {
+export default function Logout({fullName}) {
   const navigate = useNavigate()
   
   function handleLogout() {
@@ -16,7 +17,9 @@ export default function Logout() {
     <div>
       <Menu>
         <MenuButton>
-          <CircleUser/>
+          <div className="size-9 rounded-full bg-green-500 text-white flex items-center justify-center font-semibold hover:bg-blue-600 transition-colors">
+            {getInitials(fullName)}
+          </div>
         </MenuButton>
 
         <MenuItems

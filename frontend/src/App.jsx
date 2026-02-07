@@ -6,9 +6,7 @@ import InProgress from "./pages/admin/In-Progress"
 import Tasks from "./pages/admin/Tasks"
 import Team from "./pages/admin/Team"
 import ToDo from "./pages/admin/ToDo"
-import Trash from "./pages/admin/Trash"
 // User
-import UserDashboardPage from "./pages/user/UserDashboardPage"
 import UserCompletedPage from "./pages/user/UserCompletedPage"
 import UserInProgressPage from "./pages/user/UserInProgressPage"
 import UserTodoPage from "./pages/user/UserTodoPage"
@@ -55,21 +53,11 @@ function App() {
               <Team/>
             </PrivateRoute>
           }/>
-          <Route path="/admin/trash" element={
-            <PrivateRoute>
-              <Trash/>
-            </PrivateRoute>
-          }/>
         </Route>
         {/* Auth */}
         <Route path="/auth/login" element={<Login/>}/>
         {/* User */}
         <Route>
-          <Route path="/user/dashboard" element={
-            <PrivateRoute>
-              <UserDashboardPage/>
-            </PrivateRoute>
-          }/>
           <Route path="/user/completed/status" element={
             <PrivateRoute>
               <UserCompletedPage/>

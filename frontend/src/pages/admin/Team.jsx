@@ -28,12 +28,12 @@ export default function Team() {
   }, [])
 
   if (loading) {
-      return (
-        <Navigation>
-          <LoadingSpinner/>
-        </Navigation>
-      )
-    }
+    return (
+      <Navigation>
+        <LoadingSpinner/>
+      </Navigation>
+    )
+  }
 
   return (
     <Navigation>

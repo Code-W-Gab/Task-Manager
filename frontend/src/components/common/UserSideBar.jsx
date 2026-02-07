@@ -5,7 +5,6 @@ export default function UserSideBar() {
   const location = useLocation();
   
   const navItems = [
-    { to: "/user/dashboard", icon: LayoutDashboard, label: "Dashboard" },
     { to: "/user/tasks", icon: ClipboardCheck, label: "Tasks" },
     { to: "/user/completed/status", icon: CircleCheck, label: "Completed" },
     { to: "/user/in-progress/status", icon: CalendarCheck2, label: "In-Progress" },

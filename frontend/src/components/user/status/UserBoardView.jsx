@@ -16,28 +16,28 @@ export default function UserBoardView({ tasks, fetchTasks, fetchTodoTask, fetchI
 
 
   function handleDeleteTask(id) {
-      deleteTask(id)
-        .then(res => {
-          toast.success("Task Successfully Deleted!")
-          console.log(res)
-          setIsDeleteModalOpen(false)
-          if (fetchTasks) fetchTasks()
-          if (fetchCompletedTasks) fetchCompletedTasks()
-          if (fetchInProgressTask) fetchInProgressTask()
-          if (fetchTodoTask) fetchTodoTask()
-        })
-        .catch(err => {
-          toast.error("Failed to delete task")
-          console.log(err)
-        })
-    }
+    deleteTask(id)
+      .then(res => {
+        toast.success("Task Successfully Deleted!")
+        console.log(res)
+        setIsDeleteModalOpen(false)
+        if (fetchTasks) fetchTasks()
+        if (fetchCompletedTasks) fetchCompletedTasks()
+        if (fetchInProgressTask) fetchInProgressTask()
+        if (fetchTodoTask) fetchTodoTask()
+      })
+      .catch(err => {
+        toast.error("Failed to delete task")
+        console.log(err)
+      })
+  }
 
   return(
     <div>
       <div className="grid grid-cols-3 gap-4">
         {
           tasks.length === 0 
-          ? <div>NO TASK ADDED</div>
+          ? <div className="font-bold text-red-500">NO TASK ADDED</div>
           : tasks.map(task => (
             <div key={task._id}>
               <div  className="bg-white p-5 rounded-md">
