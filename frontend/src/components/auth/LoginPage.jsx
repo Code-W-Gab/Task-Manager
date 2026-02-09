@@ -34,8 +34,12 @@ export default function LoginPage() {
   }
   
   return(
-    <div className="flex items-center justify-center min-h-screen bg-gray-200">
-      <div className="bg-white px-6 py-8 w-90 rounded-md">
+    <div className="flex items-center justify-center gap-35 min-h-screen bg-gray-200 max-lg:flex-col max-lg:gap-10">
+      <div className="flex flex-col items-center gap-5 text-gray-500">
+        <p className="border rounded-xl px-2 text-sm">Manage all your task in one place!</p>
+        <h1 className="text-5xl font-bold text-green-500">Task Manager</h1>
+      </div>
+      <div className="bg-white px-6 py-8 w-90 max-sm:w-80 rounded-md">
         <h1 className="text-center text-3xl text-green-400 ">Welcome Back!</h1>
         <p className="text-center text-sm text-gray-500 mt-1 mb-6">keep all your credentials safe!</p>
         <div className="flex flex-col mb-3">
