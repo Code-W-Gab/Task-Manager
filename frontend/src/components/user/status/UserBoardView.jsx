@@ -33,8 +33,8 @@ export default function UserBoardView({ tasks, fetchTasks, fetchTodoTask, fetchI
   }
 
   return(
-    <div>
-      <div className="grid grid-cols-3 gap-4">
+    <div className="min-h-screen">
+      <div className="grid grid-cols-3 gap-4 max-sm:flex max-sm:flex-col">
         {
           tasks.length === 0 
           ? <div className="font-bold text-red-500">NO TASK ADDED</div>

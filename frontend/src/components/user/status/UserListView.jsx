@@ -32,99 +32,148 @@ export default function UserListView({ tasks, fetchTasks, fetchTodoTask, fetchIn
 
   return(
     <div className="min-h-screen">
-      <div className="bg-white p-2 rounded-sm">
-        <div className="grid grid-cols-[4fr_2fr_repeat(3,1fr)] mb-2 font-semibold">
-          <p>Task Title</p>
-          <p>Priority</p>
-          <p>Due</p>
-          <p>Teams</p>
-          <p>Actions</p>
-        </div>
-        {/* Divider */}
-        <hr className="text-gray-300"/>
-        {
-          tasks.length === 0 
-          ? <div></div>
-          : tasks.map(task => (
-            <div key={task._id} className="grid grid-cols-[4fr_2fr_repeat(3,1fr)] mt-4 border-b border-gray-300 pb-2">
-              <div className="flex items-center gap-2 mb-0.5">
-                <Circle size={10} className={`rounded-full ${task.Stage === "ToDo" ? "bg-blue-500 text-blue-500" : task.Stage === "In-Progress" ? "bg-orange-500 text-orange-500" : "bg-green-500 text-green-500 "}`}/>
-                <span className="text-sm">{truncate(task.Title, 40)}</span>
-              </div>
-              <div className={`flex items-center gap-1 ${task.PriorityLevel === "Normal" ? "text-green-500" : task.PriorityLevel === "Medium" ? "text-orange-500" : "text-red-500"}`}>
-                {task.PriorityLevel === "Normal" ? <ChevronUp size={15} /> : task.PriorityLevel === "Medium" ? <ChevronsUp size={15}/> : <ArrowUpWideNarrow size={15}/>}
-                <span className="text-sm">{`${task.PriorityLevel} Priority`}</span>
-              </div>
-              <p className="text-sm text-gray-400">{formatDate(task.Date)}</p>
-              
-              {/* Display Assigned Users */}
-              <div className="flex items-center gap-1">
-                {task.AssignedTo && task.AssignedTo.length > 0 ? (
-                  <>
-                    {task.AssignedTo.slice(0, 3).map((user, index) => (
-                      <div 
-                        key={user._id || index}
-                        className="size-6 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-semibold"
-                        title={user.FullName}
-                      >
-                        {getInitials(user.FullName)}
-                      </div>
-                    ))}
-                    {task.AssignedTo.length > 3 && (
-                      <span className="text-xs text-gray-500">
-                        +{task.AssignedTo.length - 3}
-                      </span>
-                    )}
-                  </>
-                ) : (
-                  <span className="text-xs text-gray-400">Unassigned</span>
-                )}
-              </div>
+      {/* Horizontal scroll container for mobile */}
+      <div className="overflow-x-auto">
+        <div className="bg-white p-2 rounded-sm min-w-[600px]">
+          {/* Table Header */}
+          <div className="grid grid-cols-[4fr_2fr_repeat(3,1fr)] max-lg:grid-cols-[4fr_repeat(4,2fr)] mb-2 font-semibold text-sm lg:text-base">
+            <p>Task Title</p>
+            <p>Priority</p>
+            <p>Due</p>
+            <p>Teams</p>
+            <p>Actions</p>
+          </div>
+          
+          {/* Divider */}
+          <hr className="text-gray-300"/>
+          
+          {/* Task Rows */}
+          {
+            tasks.length === 0 
+            ? <div className="text-center py-4 text-gray-500">No tasks available</div>
+            : tasks.map(task => (
+              <div key={task._id} className="grid grid-cols-[4fr_2fr_repeat(3,1fr)] max-lg:grid-cols-[4fr_repeat(4,2fr)] mt-4 border-b border-gray-300 pb-2">
+                {/* Task Title */}
+                <div className="flex items-center gap-2 mb-0.5 pr-2">
+                  <Circle 
+                    size={10} 
+                    className={`rounded-full flex-shrink-0 ${
+                      task.Stage === "ToDo" 
+                        ? "bg-blue-500 text-blue-500" 
+                        : task.Stage === "In-Progress" 
+                        ? "bg-orange-500 text-orange-500" 
+                        : "bg-green-500 text-green-500"
+                    }`}
+                  />
+                <span className="text-sm line-clamp-1">
+                  <span className="sm:hidden">{truncate(task.Title, 25)}</span>
+                  <span className="hidden sm:inline md:hidden">{truncate(task.Title, 30)}</span>
+                  <span className="hidden md:inline lg:hidden">{truncate(task.Title, 35)}</span>
+                  <span className="hidden lg:inline xl:hidden">{truncate(task.Title, 45)}</span>
+                  <span className="hidden xl:inline 2xl:hidden">{truncate(task.Title, 60)}</span>
+                  <span className="hidden 2xl:inline">{truncate(task.Title, 70)}</span>
+                </span>
+                </div>
+                
+                {/* Priority */}
+                <div className={`flex items-center gap-1 ${
+                  task.PriorityLevel === "Normal" 
+                    ? "text-green-500" 
+                    : task.PriorityLevel === "Medium" 
+                    ? "text-orange-500" 
+                    : "text-red-500"
+                }`}>
+                  {task.PriorityLevel === "Normal" 
+                    ? <ChevronUp size={15} /> 
+                    : task.PriorityLevel === "Medium" 
+                    ? <ChevronsUp size={15}/> 
+                    : <ArrowUpWideNarrow size={15}/>
+                  }
+                  <span className="text-sm whitespace-nowrap">{task.PriorityLevel}</span>
+                </div>
+                
+                {/* Due Date */}
+                <p className="text-sm text-gray-400 whitespace-nowrap">{formatDate(task.Date)}</p>
+                
+                {/* Assigned Users */}
+                <div className="flex items-center gap-1">
+                  {task.AssignedTo && task.AssignedTo.length > 0 ? (
+                    <>
+                      {task.AssignedTo.slice(0, 3).map((user, index) => (
+                        <div 
+                          key={user._id || index}
+                          className="size-6 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-semibold flex-shrink-0"
+                          title={user.FullName}
+                        >
+                          {getInitials(user.FullName)}
+                        </div>
+                      ))}
+                      {task.AssignedTo.length > 3 && (
+                        <span className="text-xs text-gray-500">
+                          +{task.AssignedTo.length - 3}
+                        </span>
+                      )}
+                    </>
+                  ) : (
+                    <span className="text-xs text-gray-400">Unassigned</span>
+                  )}
+                </div>
 
-              <div className="flex gap-4">
-                <button className="text-green-500 text-sm" onClick={() => {
-                  setSelectedTaskId(task._id)
-                  setIsEditModalOpen(true)
-                }}>Edit</button>
-                <button className="text-red-500 text-sm" onClick={() => {
-                  setSelectedTaskId(task._id)
-                  setIsDeleteModalOpen(true)
-                }}>Delete</button>
+                {/* Actions */}
+                <div className="flex gap-4">
+                  <button 
+                    className="text-green-500 text-sm hover:text-green-600 transition-colors" 
+                    onClick={() => {
+                      setSelectedTaskId(task._id)
+                      setIsEditModalOpen(true)
+                    }}
+                  >
+                    Edit
+                  </button>
+                  <button 
+                    className="text-red-500 text-sm hover:text-red-600 transition-colors" 
+                    onClick={() => {
+                      setSelectedTaskId(task._id)
+                      setIsDeleteModalOpen(true)
+                    }}
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
-            </div>
-          ))
-        }
-      </div>  
+            ))
+          }
+        </div>
+      </div>
 
       {/* Edit Task Modal */}
       {isEditModalOpen && (
-        <div className="fixed inset-0 flex bg-gray-800/50 items-center justify-center">
+        <div className="fixed inset-0 flex bg-gray-800/50 items-center justify-center z-50">
           <div className="bg-opacity-25">
-            <UserEditTask
+            <EditTask 
+              fetchTasks={fetchTasks}
+              fetchCompletedTasks={fetchCompletedTasks}
+              fetchInProgressTask={fetchInProgressTask}
+              fetchTodoTask={fetchTodoTask}
               onClose={() => setIsEditModalOpen(false)}
               id={selectedTaskId}
-              fetchTasks={fetchTasks} 
-              fetchTodoTask={fetchTodoTask} 
-              fetchInProgressTask={fetchInProgressTask} 
-              fetchCompletedTasks={fetchCompletedTasks}
-              />
+            />
           </div>
         </div>
       )}
-
+      
       {/* Delete Task Modal */}
       {isDeleteModalOpen && (
-        <div className="fixed inset-0 flex bg-gray-800/50 items-center justify-center">
+        <div className="fixed inset-0 flex bg-gray-800/50 items-center justify-center z-50">
           <div className="bg-opacity-25">
             <DeletePopUp 
-              setIsModalOpen={setIsDeleteModalOpen}
               title={"Task"}
+              setIsModalOpen={setIsDeleteModalOpen} 
               onDelete={() => handleDeleteTask(selectedTaskId)}
             />
           </div>
         </div>
       )}
-
     </div>
   )
 }
