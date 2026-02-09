@@ -58,7 +58,7 @@ export default function AddTask({ onClose, fetchTasks }) {
   
   return(
     <div>
-      <div className="bg-white w-90 p-4 rounded-md text-gray-600">
+      <div className="bg-white w-90 max-sm:w-80 p-4 rounded-md text-gray-600">
         <h1 className="text-black text-md mb-2 font-bold">ADD TASK</h1>
         
         <div className="flex flex-col mb-2">

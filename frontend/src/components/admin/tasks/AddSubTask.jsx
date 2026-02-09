@@ -35,7 +35,7 @@ export default function AddSubTask({ onClose, taskId, fetchTasks, fetchCompleted
   }
 
   return(
-    <div className="bg-white w-100 p-4 rounded-md text-gray-600">
+    <div className="bg-white w-100 max-sm:w-85 p-4 rounded-md text-gray-600">
       <h1 className="text-black text-md mb-2 font-bold">ADD SUB-TASK</h1>
       <div className="flex flex-col mb-2">
         <label>Title</label>

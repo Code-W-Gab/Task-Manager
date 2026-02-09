@@ -8,7 +8,7 @@ export default function AdminTask({ onCreateTask, tasks, fetchTasks }) {
 
   return(
     <div className="bg-gray-200 min-h-screen rounded-sm p-5">
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-4 max-sm:mb-7">
         <h1 className="text-xl font-bold">Tasks</h1>
         <button 
           onClick={onCreateTask}
@@ -22,16 +22,17 @@ export default function AdminTask({ onCreateTask, tasks, fetchTasks }) {
         {/* Board view */}
         <button 
         onClick={() => setActiveView("board")}
-        className={`flex items-center gap-2 bg-white p-2 rounded-md ${activeView === "board" ? "border-b-4 border-green-500" : ""}`}>
+        className={`flex items-center gap-2 bg-white p-2 rounded-md ${activeView === "board" ? "border-b-4 border-green-500" : ""} 
+        `}>
           <LayoutDashboard size={15} />
-          <span>Board View</span>
+          <span className="max-sm:text-sm">Board View</span>
         </button>
         {/* List view */}
         <button 
         onClick={() => setActiveView("list")}
         className={`flex items-center gap-2 bg-white p-2 rounded-md ${activeView === "list" ? "border-b-4 border-green-500" : ""}`}>
           <List size={15}/>
-          <span>List View</span>
+          <span className="max-sm:text-sm">List View</span>
         </button>
       </div>
       

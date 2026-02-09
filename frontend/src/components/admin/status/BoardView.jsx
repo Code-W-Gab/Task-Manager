@@ -35,13 +35,13 @@ export default function BoardView({tasks, fetchTasks, fetchCompletedTasks, fetch
 
   return(
     <div className="min-h-screen">
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-3 gap-4 max-sm:flex max-sm:flex-col">
         {
           tasks.length === 0 
           ? <div className="font-bold text-red-500">NO TASK ADDED</div>
           : tasks.map(task => (
-            <div>
-              <div key={task._id} className="bg-white p-5 rounded-md">
+            <div key={task._id}>
+              <div className="bg-white p-5 rounded-md">
                 <div className="flex items-center justify-between mb-2">
                   <div className={`flex items-center gap-1 ${task.PriorityLevel === "Normal" ? "text-green-500" : task.PriorityLevel === "Medium" ? "text-orange-500" : "text-red-500"}`}>
                     {task.PriorityLevel === "Normal" ? <ChevronUp size={20}/> : task.PriorityLevel === "Medium" ? <ChevronsUp size={20}/> : <ArrowUpWideNarrow size={20}/>}

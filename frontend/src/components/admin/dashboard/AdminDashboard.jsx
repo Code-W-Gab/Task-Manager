@@ -4,9 +4,9 @@ import Tracker from "./Tracker";
 
 export default function AdminDashboard() {
   return(
-    <div className="bg-gray-200 h-full rounded-sm p-5">
+    <div className="bg-gray-200 sm:h-full  rounded-sm p-5">
       <Tracker/>
-      <div className="grid grid-cols-[2fr_1.1fr] gap-4">
+      <div className="grid grid-cols-[2fr_1.1fr] max-lg:flex max-lg:flex-col gap-4 max-lg:gap-0">
         <div>
           <TaskList/>
         </div>

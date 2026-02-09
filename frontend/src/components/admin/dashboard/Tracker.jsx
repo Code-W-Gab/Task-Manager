@@ -33,7 +33,7 @@ export default function Tracker() {
   }, []);
 
   return(
-    <div className="grid grid-cols-4 gap-4">
+    <div className="grid grid-cols-4 max-lg:grid-cols-2 gap-4 max-sm:flex max-sm:flex-col">
       <Container title={"TOTAL TASK"} total={taskCounts.total} icon={<ListChecks size={20}/>} color={"bg-blue-500"}/>
       <Container title={"COMPLETED TASK"} total={taskCounts.completed} icon={<CircleCheckBig size={20}/>} color={"bg-gray-600"}/>
       <Container title={"TASK IN PROGRESS"} total={taskCounts.inProgress} icon={<CalendarCheck size={20}/>} color={"bg-amber-400"}/>

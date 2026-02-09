@@ -27,7 +27,7 @@ export default function TeamList() {
       <hr className="text-gray-300 mb-4"/>
       {
         users.map(user => (
-          <div key={user.id} className="grid grid-cols-[2fr_repeat(2,1fr)] items-center mt-4 border-b border-gray-300 pb-1 text-gray-600 text-sm">
+          <div key={user._id} className="grid grid-cols-[2fr_repeat(2,1fr)] items-center mt-4 border-b border-gray-300 pb-1 text-gray-600 text-sm">
             <div className="flex items-center gap-2">
               <div className="size-7 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-semibold">
                 {getInitials(user.FullName)}
